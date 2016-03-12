@@ -32,49 +32,18 @@
 //if (($flagcourse == "") && ($flagsy == ""))
 //{
 $hidden_pcourse= $_POST['hidden_pcourse'];
-
-
-$pcourse = $_POST['pcourse'];
-
-  $result = mysql_query("SELECT * from course where course_id = '$pcourse' ");
-			 if (!$result) 
-	{
-    die("Query to show fields from table failed");
-	}
-$numberOfRows = MYSQL_NUMROWS($result);
-
-If ($numberOfRows == 0) 
-	{
-	echo '';
-	}
-else if ($numberOfRows > 0) 
-	{
-	$i=0;
-	while ($i<$numberOfRows)
-		{			
-	$dept_id = MYSQL_RESULT($result,$i,"dept_id");
-						
-	$i++;	 
-			}
-			}
-			
-			if ($dept_id == 2){
-			  header(
+			 header(
 			 		"Location: search_c_result.php?pCourse=". $_POST['pcourse'] 
 					."&pSy=". $_POST['psy'] 
 					."&psem=". $_POST['psem'] 					
 		 		   );				   				   
+		//	}		 	 
+			
 			}
-			elseif($dept_id != 2)
-			{
-			 header(
-			 		"Location: search_c_result_2.php?pCourse=". $_POST['pcourse'] 
-					."&pSy=". $_POST['psy'] 
-					."&psem=". $_POST['psem'] 					
-		 		   );				   				   
-			}
-			}
-					   				   
+		 //	$hidden_pcourse= $_POST['hidden_pcourseid'];
+		//	$hidden_psy= $_POST['hidden_psyid'];
+			
+			
 ?>
 <body>
 <div id="container">
@@ -83,31 +52,65 @@ else if ($numberOfRows > 0)
     <div id="logo_w2"></div>
     <ul class="cssMenu cssMenum">
 	<li class=" cssMenui"><a class="  cssMenui" href="index.php"><img src="../images/homepage.gif" />Home</a></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
 		<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Teacher Schedule</a></li>
 		<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
 		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
-		<li class=" cssMenui"><a class="  cssMenui" href="faculty-cit.php"><span><img src="../images/User (1).ico" />Teacher</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="user.php"><span><img src="../images/user.ico" />User</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
-			<li class=" cssMenui"><a class="  cssMenui" href="faculty-cit.php"><img src="../images/folder-new.ico" />Add</a></li>
-			<li class=" cssMenui"><a class="  cssMenui" href="facultylist-cit.php"><img src="../images/folder.ico" />View</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="user.php"><img src="../images/folder-new.ico" />Add</a></li>
+
+			<li class=" cssMenui"><a class="  cssMenui" href="userlist.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="student-cit.php"><span><img src="../images/courses.JPG" />Course</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="faculty-a.php"><span><img src="../images/User (1).ico" />Teacher</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
-			<li class=" cssMenui"><a class="  cssMenui" href="student-cit.php"><img src="../images/folder-new.ico" />Add</a></li>
-			<li class=" cssMenui"><a class="  cssMenui" href="student-list-cit.php"><img src="../images/folder.ico" />View</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="faculty-a.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="facultylist-a.php"><img src="../images/folder.ico" />View</a></li>
+		</ul>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="student-a.php"><span><img src="../images/courses.JPG" />Course</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<ul class=" cssMenum">
+			<li class=" cssMenui"><a class="  cssMenui" href="student-a.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="student-list-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="subject-a.php"><span><img src="../images/Summer-user.ico" />Subject</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<ul class=" cssMenum">
+			<li class=" cssMenui"><a class="  cssMenui" href="subject-a.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="subjectlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
+
+		<li class=" cssMenui"><a class="  cssMenui" href="room-a.php"><span><img src="../images/school-icon.png" />Room</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<ul class=" cssMenum">
+			<li class=" cssMenui"><a class="  cssMenui" href="room-a.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="roomlist-a.php"><img src="../images/folder.ico" />View</a></li>
+		</ul>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="dept-a.php"><span><img src="../images/dept.jpg" />Department</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+
+		<ul class=" cssMenum">
+			<li class=" cssMenui"><a class="  cssMenui" href="dept-a.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
+		</ul>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" />School Year</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<ul class=" cssMenum">
+
+			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="yearlist-a.php"><img src="../images/folder.ico" />View</a></li>
+		</ul>
+		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
+	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="sched_cit.php">Schedule</a></li>
+	<!--<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>-->
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
@@ -115,7 +118,7 @@ else if ($numberOfRows > 0)
 		<li class=" cssMenui"><a class="  cssMenui" href="about_dev.php"><img src="../images/dev.png" />Developer</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="user manual.pdf">Help</a></li>
+	<li class=" cssMenui"><a class="  cssMenui" href="User Manual.pdf">Help</a></li>
 
 	<li class=" cssMenui"><a class="  cssMenui" href="logout.php">Log out</a></li>
 </ul>
@@ -138,10 +141,10 @@ else if ($numberOfRows > 0)
 <select name="pcourse"  id="pcourse" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysql_query("SELECT * FROM course ORDER BY course_yrSec ");			  	
+				$result = mysqli_query($conn,"SELECT * FROM course ORDER BY course_yrSec ");			  	
 				do {  ?>
   <option value="<?php echo $row['course_id'];?>"><?php echo $row['course_yrSec'];?> </option>
-  <?php } while ($row = mysql_fetch_assoc($result)); ?>
+  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
 </select>
 <!-- 
 			Setting up the correct combo box width alignment to table
@@ -160,10 +163,10 @@ else if ($numberOfRows > 0)
                 <select name="psy"  id="psy" style="width: 267px" onchange="javascript: return optionList7_SelectedIndex()">
                   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysql_query("SELECT * FROM school_yr ORDER BY school_year ");			  	
+				$result = mysqli_query($conn,"SELECT * FROM school_yr ORDER BY school_year ");			  	
 				do {  ?>
                   <option value="<?php echo $row['year_id'];?>"><?php echo $row['school_year'];?> </option>
-                  <?php } while ($row = mysql_fetch_assoc($result)); ?>
+                  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
                 </select>
                 <!-- 
 			Setting up the correct combo box width alignment to table
@@ -176,16 +179,16 @@ else if ($numberOfRows > 0)
               <td><span class="style21"><span class="style20"><?php echo $flagsy; ?></span></span></td>
             </tr> 
             <tr   >
-              <td height="48"><div align="right" class="style3">Semester</div></td>
+              <td height="34"><div align="right" class="style3">Semester</div></td>
               <td  ><span class="style22">
                 <label>
                 <select name="psem"  id="psem" style="width: 267px" onchange="javascript: return optionList1_SelectedIndex()">
                   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysql_query("SELECT * FROM sem ORDER BY semester ");			  	
+				$result = mysqli_query($conn,"SELECT * FROM sem ORDER BY semester ");			  	
 				do {  ?>
                   <option value="<?php echo $row['sem_id'];?>"><?php echo $row['semester'];?> </option>
-                  <?php } while ($row = mysql_fetch_assoc($result)); ?>
+                  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
                 </select>
                 <!-- 
 			Setting up the correct combo box width alignment to table
@@ -210,11 +213,13 @@ else if ($numberOfRows > 0)
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_dev.php">Developer</a>| <a href="about_sched.php">Scheduling System</a>| <a href="contact.php">Contact Us</a>| <a href="www.chmsc.edu.ph">CHMSC </a><a href="Admin/www.chmsc.edu.ph"></a></span></p>
+		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling 	                                System</a>
+                            </span>
+          </p>
+	  </div>
 	</div>
-  </div>
 	
-	<div id="footer">Copyright © 2009 </div>	
+	<div id="footer">Four Dark Riders</div>		
 </div>
 </body>
 </html>

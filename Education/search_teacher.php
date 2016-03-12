@@ -43,7 +43,7 @@ $hidden_pcourse= $_POST['hidden_pt'];
     <img src="../images/logo copy.jpg" alt="s" width="717" height="160" />
     <div id="logo_w2"></div>
     <ul class="cssMenu cssMenum">
-	<li class=" cssMenui"><a class="  cssMenui" href="admin.php"><img src="../images/homepage.gif" />Home</a></li>
+	<li class=" cssMenui"><a class="  cssMenui" href="index.php"><img src="../images/homepage.gif" />Home</a></li>
 	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
 		<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Teacher Schedule</a></li>

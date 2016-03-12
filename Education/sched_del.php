@@ -9,8 +9,8 @@
 	$psem=$_REQUEST['psem'];
 	
 	// sending query
-	mysql_query("DELETE FROM sched WHERE sched_id = '$sched_id'")
-	or die(mysql_error());  	
+	mysqli_query($conn,"DELETE FROM sched WHERE sched_id = '$sched_id'")
+	or die(mysqli_error($conn));  	
 	
 	 header(
 			 		"Location: search_t_result.php?pT=". $pT
