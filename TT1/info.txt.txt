@@ -1,0 +1,8 @@
+Instructions:
+1. Create a database name: scheduling
+2. Import the sql file which is in the sql directory.
+3. Paste the whole Scheduling system folder in Wamp/wwww/ directory.
+4. Conrgatulations.. your good to go.
+5. Please do take time to share and tweet the link of this file. to share to others as well.
+
+Thanks you and God bless.. ^_^
