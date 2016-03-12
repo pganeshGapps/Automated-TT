@@ -1,4 +1,4 @@
-<?php if (empty($session)) { session_start(); } ?>
+<?php session_start(); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,52 +10,50 @@
 .style4 {	font-size: 11px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-#Layer1 {
-	position:absolute;
-	left:595px;
-	top:205px;
-	width:132px;
-	height:4px;
-	z-index:1;
-}
-.style31 {color: #FFFFFF}
-.style32 {color: #000099}
 -->
 </style>
 </head>
-<?php
- include("../includes/session.php");
-?>
+
+  <?php 
+  
+  
+		@session_unregister('is');
+		@session_unset();
+
+  
+  ?>
+
 <body>
 <div id="container">
 	<div id="header"><img src="../images/logo copy.jpg" alt="s" width="717" height="160" />
-<ul class="cssMenu cssMenum">
+	  <div id="logo_w2"></div>
+		<ul class="cssMenu cssMenum">
 	<li class=" cssMenui"><a class="  cssMenui" href="index.php"><img src="../images/homepage.gif" />Home</a></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>View</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
-		<!--<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Teacher Schedule</a></li>-->
+		<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Teacher Schedule</a></li>
 		<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
-		<!--<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>-->
+		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
-		<li class=" cssMenui"><a class="  cssMenui" href="faculty-cit.php"><span><img src="../images/User (1).ico" />Teacher</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="faculty-educ.php"><span><img src="../images/User (1).ico" />Teacher</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
-			<li class=" cssMenui"><a class="  cssMenui" href="faculty-cit.php"><img src="../images/folder-new.ico" />Add</a></li>
-			<li class=" cssMenui"><a class="  cssMenui" href="facultylist-cit.php"><img src="../images/folder.ico" />View</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="faculty-educ.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="facultylist-educ.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="student-cit.php"><span><img src="../images/courses.JPG" />Course</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="student-educ.php"><span><img src="../images/courses.JPG" />Course</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
-			<li class=" cssMenui"><a class="  cssMenui" href="student-cit.php"><img src="../images/folder-new.ico" />Add</a></li>
-			<li class=" cssMenui"><a class="  cssMenui" href="student-list-cit.php"><img src="../images/folder.ico" />View</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="student-educ.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="student-list-educ.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		</ul>
+	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="sched_cit.php">Schedule</a></li>-->
+	<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
@@ -63,32 +61,31 @@
 		<li class=" cssMenui"><a class="  cssMenui" href="about_dev.php"><img src="../images/dev.png" />Developer</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="user manual.pdf">Help</a></li>
+	<li class=" cssMenui"><a class="  cssMenui" href="help.php">Help</a></li>
 
-	<li class=" cssMenui"><a class="  cssMenui" href="logout.php">Log out</a></li>
+
 </ul>
   </div>
 	<div id="content">
 	
 	  <div id="left">
-		<form action="<?php echo $_SERVER[PHP_SELF] ?>" name="form1" method="post" ><br />
-	   
+		<form action="<?php echo $_SERVER[PHP_SELF] ?>" name="form1" method="post" >
 		  <div align="center">
-		    <p>IIT Jodhpur Scheduling System</p>
-		    <p><strong>Indian Institute of Technology Jodhpur </strong></p>
-		    <br />
-		  </div>
+		    <p>Carlos Hilado Memorial State College Scheduling System</p>
+		    <p><strong>College of Education </strong></p>
+		    <p><strong>You have Logged out of the system... <a href="../index.php">click here</a> to sign in again... </strong></p>
+	      </div>
 	    </form>
 	    <h1>&nbsp;</h1>
 	</div>
 		<div id="program"></div>
-	  <div id="right">
+		<div id="right">
 			<h2>&nbsp;</h2>
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
-	  </div>
+		</div>
 
 		
 
@@ -98,7 +95,7 @@
 </div>
 	
 	<div id="footer">
-	  <div align="center">Four Dark Riders </div>
+	  <div align="center">Copyright © 2009 </div>
 	</div>	
 </div>
 </body>
