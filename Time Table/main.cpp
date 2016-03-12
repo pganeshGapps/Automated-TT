@@ -14,7 +14,7 @@ int main()
     Algorithm::GetInstance().Start();
     Schedule* best = Algorithm::GetInstance().GetBestChromosome();
     vector<list<CourseClass*> > slots = best->GetSlots();
-    ofstream out("tt.txt");
+    ofstream out("tt.cfg");
     int room_id=0;
     for(int i=0;i<slots.size();i++)
     {
@@ -29,14 +29,10 @@ int main()
             out << ((*it)->GetCourse()).GetName() << endl;
             out << ((*it)->GetProfessor()).GetName() << endl;
             out << room_id << endl;
-            cout << ((*it)->GetCourse()).GetName() << endl;
-            cout << ((*it)->GetProfessor()).GetName() << endl;
-            cout << room_id << endl;
         }
         else
         {
             out << -1 << endl;
-            cout << -1 << endl;
         }
     }
     return 0;
