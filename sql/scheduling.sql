@@ -556,7 +556,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `userpass`, `dept_id`) VALUES
 (1, 'admin', 'a', 4),
-(7, 'cit', 'cit', 2),
+(7, 'student', 'stud', 2),
 (8, 'educ', 'educ', 1),
 (9, 'sas', 'sas', 3),
 (10, 'deancit', 'd', 42),

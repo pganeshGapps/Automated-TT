@@ -74,7 +74,7 @@
 		<form action="<?php echo $_SERVER[PHP_SELF] ?>" name="form1" method="post" ><br />
 	   
 		  <div align="center">
-		    <p>Carlos Hilado Memorial State College Scheduling System</p>
+		    <p>IIT Jodhpur Scheduling System</p>
 		    <p><strong>College of Industrial Technology </strong></p>
 		    <br />
 		  </div>

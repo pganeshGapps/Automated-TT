@@ -1,5 +1,5 @@
 <?php  
-	$conn = mysqli_connect('localhost', 'root', 'root','scheduling');
+	$conn = mysqli_connect('localhost', 'root', '','scheduling');
 	 if (!$conn)
     {
 	 die('Could not connect: ' . mysqli_error());
