@@ -20,6 +20,15 @@
 </head>
 <?php
 include("../includes/session.php");
+require ("../includes/dbconnection.php");
+
+if (isset($_POST['cmdSubmit'])) 
+  	{ 		
+		
+			 header(
+			 		"Location: mastertt.php"	
+		 		   );				   				   
+			}
 	
 ?>
 <body>
@@ -77,13 +86,7 @@ include("../includes/session.php");
 			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<!-- Add School Year -->
-		<ul class=" cssMenum">
-
-			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
-			<li class=" cssMenui"><a class="  cssMenui" href="yearlist-a.php"><img src="../images/folder.ico" />View</a></li>
-		</ul>
-		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
+	<!-- Add School year -->
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>
@@ -109,6 +112,39 @@ include("../includes/session.php");
               <br />
 		      <p>&nbsp;</p>
 		      <p>Welcome to the ADMINISTRATOR'S Page!!! </p>
+		      <button value="generate">Generate new Timetable</button>
+		      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+				<script type="text/javascript">
+				$(document).ready(function()
+				{
+					$("button").click(function()
+					{
+						<?php
+						exec("main.exe",$output);
+						mysqli_query($conn,"DELETE FROM sched ");
+						$myfile = fopen("tt.cfg", "r") or die("Unable to open file!");
+						do
+						{
+							$line1 = intval(fgets($myfile));
+							$line2 = intval(fgets($myfile));
+							$line3 = intval(fgets($myfile));
+							$line4 = intval(fgets($myfile));
+							$line5 = fgets($myfile);
+							$line6 = intval(fgets($myfile));
+							$t = $line2+1;
+							mysqli_query($conn,"INSERT INTO sched (sched_id, room_id, course_id, sub_id, teacher_id, time_s_id, time_e_id, day_id, sem_id, year_id, dept_id) VALUES(0,$line6,0,$line3,$line4,$line2,$t,$line1,0,0,0) ");
+						}while(!feof($myfile));
+
+						fclose($myfile);
+						mysqli_query($conn,"DELETE FROM sched WHERE teacher_id=0");
+
+						?>
+					});
+				});
+			  </script>
+			  <form action="<?php echo $_SERVER[PHP_SELF] ?>" name="form1" method="post" >
+			  	<input type="submit" name="cmdSubmit" value="View current Timetable" />
+			  </form>
 		      <p><br />
 	      </p>
           </form>
