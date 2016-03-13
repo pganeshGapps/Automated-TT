@@ -23,7 +23,14 @@ include("../includes/session.php");
 	$profile_no =$_REQUEST['profile_no'];
 
 		$result =  mysqli_query($conn,"SELECT * FROM profile WHERE teacher_id  = '$profile_no'");
-				
+				function mysqli_result($result, $row, $field = 0) {
+    // Adjust the result pointer to that specific row
+    $result->data_seek($row);
+    // Fetch result array
+    $data = $result->fetch_array();
+ 
+    return $data[$field];
+}
 if (!$result) 
 		{
 		die("Query to show fields from table failed");
@@ -38,10 +45,10 @@ if (!$result)
 				{
 				$i=0;
 			
-			$faculty_name = MYSQL_RESULT($result,$i,"teacher_name");
-			$acad_rank = MYSQL_RESULT($result,$i,"acad_rank");
-			$des = MYSQL_RESULT($result,$i,"designation");
-			$Dept = MYSQL_RESULT($result,$i,"dept_id");
+			$faculty_name = mysqli_result($result,$i,"teacher_name");
+			$acad_rank = mysqli_result($result,$i,"acad_rank");
+			$des = mysqli_result($result,$i,"designation");
+			$Dept = mysqli_result($result,$i,"dept_id");
 				
 				
 				}
@@ -225,7 +232,7 @@ if (!$result)
     </div>
   </div>
 	
-	<div id="footer">Copyright © 2009 </div>	
+	<div id="footer">Four Dark Riders </div>	
 </div>
 </body>
 </html>

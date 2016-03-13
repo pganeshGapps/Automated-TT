@@ -6,8 +6,8 @@
 	$sub_id =$_REQUEST['sub_id'];
 	
 	// sending query
-	mysql_query("DELETE FROM subjects WHERE sub_id = '$sub_id'")
-	or die(mysql_error());  	
+	mysqli_query($conn,"DELETE FROM subjects WHERE sub_id = '$sub_id'")
+	or die(mysqli_error($conn));  	
 	
 	header("Location: subjectlist-a.php");
 ?>

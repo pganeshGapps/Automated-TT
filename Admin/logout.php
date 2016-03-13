@@ -127,7 +127,7 @@
 	  </div>
 	</div>
 	
-	<div id="footer">Copyright © 2009 </div>	
+	<div id="footer">Copyright Â© 2009 </div>	
 </div>
 </body>
 </html>
@@ -163,7 +163,6 @@
 			* text - For an option, what's in between the option tags
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
-
 			var selObj = document.getElementById('pdept');
 			//var txtIndexObj = document.getElementById('txtIndex');
 			var hidden_dept_id_ValueObj = document.getElementById('hidden_dept_id');
