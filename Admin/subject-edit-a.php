@@ -245,7 +245,11 @@ mysqli_query ($conn,"UPDATE subjects SET sub_code ='$txtccode_a' , sub_name = '$
                       <option value="<?php echo $row['dept_id'];?>"><?php echo $row['department'];?> </option>
                       <?php } while ($row = mysqli_fetch_assoc($result)); ?>
                     </select>
+<<<<<<< HEAD
                     <!-- 
+=======
+                    <!--
+>>>>>>> origin/master
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
