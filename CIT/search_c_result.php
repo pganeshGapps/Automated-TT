@@ -3038,9 +3038,9 @@ if (!$result)
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling 	                                System</a>
+		 <!-- <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling 	                                System</a>
                             </span>
-          </p>
+          </p>-->
 	  </div>
 	</div>
 	

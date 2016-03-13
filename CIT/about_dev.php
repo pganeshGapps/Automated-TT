@@ -12,7 +12,7 @@
 }
 #Layer2 {
 	position:absolute;
-	left:276px;
+	left:285px;
 	top:898px;
 	width:229px;
 	height:104px;
@@ -28,32 +28,32 @@
 }
 #Layer5 {
 	position:absolute;
-	left:180px;
-	top:671px;
+	left:200px;
+	top:669px;
 	width:277px;
 	height:108px;
 	z-index:3;
 }
 #Layer6 {
 	position:absolute;
-	left:742px;
+	left:762px;
 	top:565px;
-	width:206px;
-	height:219px;
+	width:232px;
+	height:227px;
 	z-index:4;
 }
 #Layer7 {
 	position:absolute;
-	left:311px;
-	top:369px;
+	left:324px;
+	top:368px;
 	width:186px;
 	height:170px;
 	z-index:5;
 }
 #Layer8 {
 	position:absolute;
-	left:328px;
-	top:805px;
+	left:347px;
+	top:803px;
 	width:175px;
 	height:195px;
 	z-index:5;
@@ -69,41 +69,41 @@ include("../includes/session.php");
 
 
 
-<div id="Layer6"><img src="../images/dev/may.JPG" width="205" height="220" /></div>
-<div id="Layer7"><img src="../images/dev/4.JPG" alt="a" width="195" height="174" border="0" /></div>
-<div id="Layer8"><img src="../images/dev/brom.JPG" alt="a" height="206" /></div>
+<!--<div id="Layer6"><img src="../images/sched.JPG" alt="a" width="195" height="165" border="0" /></div>
+<div id="Layer7"><img src="../images/dev/4.JPG" alt="a" width="195" height="165" border="0" /></div>
+<div id="Layer8"><img src="../images/dev/brom.JPG" alt="a" height="206" /></div>-->
 
 <div id="layer8"></div>
 <div id="container">
   <div id="header"><img src="../images/logo copy.jpg" alt="s" width="717" height="160" />
     <div id="logo_w2"></div>
     <ul class="cssMenu cssMenum">
-	<li class=" cssMenui"><a class="  cssMenui" href="index.php"><img src="../images/homepage.gif" />Home</a></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<li class=" cssMenui"><a class="  cssMenui" href="index.php"><img src="../images/homepage.gif" border="0" />Home</a></li>
+	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>View</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
-		<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Teacher Schedule</a></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Faculty Schedule</a></li>
+		<!--<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>-->
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
-		<li class=" cssMenui"><a class="  cssMenui" href="faculty-cit.php"><span><img src="../images/User (1).ico" />Teacher</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="faculty-educ.php"><span><img src="../images/User (1).ico" />Teacher</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
-			<li class=" cssMenui"><a class="  cssMenui" href="faculty-cit.php"><img src="../images/folder-new.ico" />Add</a></li>
-			<li class=" cssMenui"><a class="  cssMenui" href="facultylist-cit.php"><img src="../images/folder.ico" />View</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="faculty-educ.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="facultylist-educ.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="student-cit.php"><span><img src="../images/courses.JPG" />Course</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="student-educ.php"><span><img src="../images/courses.JPG" />Course</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
-			<li class=" cssMenui"><a class="  cssMenui" href="student-cit.php"><img src="../images/folder-new.ico" />Add</a></li>
-			<li class=" cssMenui"><a class="  cssMenui" href="student-list-cit.php"><img src="../images/folder.ico" />View</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="student-educ.php"><img src="../images/folder-new.ico" />Add</a></li>
+			<li class=" cssMenui"><a class="  cssMenui" href="student-list-educ.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		</ul>
+	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="sched_cit.php">Schedule</a></li>
+	<!--<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>-->
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
@@ -111,7 +111,7 @@ include("../includes/session.php");
 		<li class=" cssMenui"><a class="  cssMenui" href="about_dev.php"><img src="../images/dev.png" />Developer</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="user manual.pdf">Help</a></li>
+	<li class=" cssMenui"><a class="  cssMenui" href="help.php">Help</a></li>
 
 	<li class=" cssMenui"><a class="  cssMenui" href="logout.php">Log out</a></li>
 </ul>
@@ -125,27 +125,34 @@ include("../includes/session.php");
 		    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
               <br />
               <div id="Layer2">
-                <p align="left"><strong>Melanie Felizardo</strong></p>
-				<p align="left">BSIM 4B</p>
-				 <p align="left">Email:melay_felizardo@yahoo.com </p>
+                <p align="left"><strong>Ganesh Patil</strong></p>
+				<p align="left">B14CS017</p>
+				 <p align="left">Email:patil.1@iitj.ac.in </p>
+				 <p align="left"><strong>Varun Kumar</strong></p>
+				<p align="left">B14CS039</p>
+				 <p align="left">Email:kumar.2@iitj.ac.in </p>
               </div>
 			  <div id="Layer3">
-			    <p align="left"><strong>Melanie Porquez</strong></p>
-  <p align="left">BSIM 4B</p>
-  <p align="left">Email: bibz_porquez@yahoo.com </p>
+			    <p align="left"><strong>Ayush Agrawal</strong></p>
+  <p align="left">B14CS010</p>
+  <p align="left">Email: agrawal.1@iitj.ac.in </p>
+  <p align="left"><strong>Akshay Chaudhari</strong></p>
+  <p align="left">B14CS013</p>
+  <p align="left">Email: gajanan.1@iitj.ac.in </p>
 </div>
 <div id="Layer4">
   <p align="right">&nbsp;</p>
   </div>
   <div id="Layer5">
-  <p align="right"><strong>May Ann Corugda</strong></p>
-  <p align="right">BSIM 4B</p>
-  <p align="right">Email: corugda_mayann@yahoo.com </p>
+  <!--<p align="left"><strong><!--&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp May Ann Corugda--></strong></p>
+  <!--<p align="left"><!--&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp BSIM 4B--></p>
+  <!--<p align="left"><!--&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Email: corugda_mayann@yahoo.com --></p>
+  <br>
 </div>
 		      <p><strong>About the Developers </strong><br />
 		      </p>
           </form>
-            <p>These are the Students of Carlos Hilado Memorial State College who developed the Online Scheduling System.</p>
+            <p>We are the Students of IIT Jodhpur who developed the Online Scheduling System.</p>
         </div>
 	   
 	  </div>
@@ -182,11 +189,10 @@ include("../includes/session.php");
 		  <p>&nbsp;</p>
 		</div>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_dev.php">Developer</a>| <a href="about_sched.php">Scheduling System</a>| <a href="contact.html">Contact Us</a>| <a href="www.chmsc.edu.ph">CHMSC </a></span></p>
-	  </div>
+		 <!-- <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_dev.php">Developer</a>| <a href="about_sched.php">Scheduling System</a>| <a href="contact.html">Contact Us</a>| <a href="www.chmsc.edu.ph">CHMSC </a></span></p>-->	  </div>
 	</div>
 	
-	<div id="footer">Copyright © 2009 </div>	
+	<div id="footer">Four Dark Riders </div>	
 </div>
 </body>
 </html>
