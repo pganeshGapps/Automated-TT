@@ -1,19 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.6
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 03, 2010 at 11:01 AM
--- Server version: 5.0.51
--- PHP Version: 5.2.6
+-- Host: 127.0.0.1
+-- Generation Time: Mar 12, 2016 at 11:11 PM
+-- Server version: 10.1.10-MariaDB
+-- PHP Version: 5.6.15
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `scheduling`
@@ -26,12 +27,11 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE `course` (
-  `course_id` int(10) NOT NULL auto_increment,
+  `course_id` int(10) NOT NULL,
   `course_yrSec` varchar(20) NOT NULL,
   `dept_id` tinyint(4) NOT NULL,
-  `major` varchar(50) NOT NULL,
-  PRIMARY KEY  (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+  `major` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
@@ -67,8 +67,7 @@ INSERT INTO `course` (`course_id`, `course_yrSec`, `dept_id`, `major`) VALUES
 (45, 'BSIS2B', 2, ''),
 (46, 'BSIS3A', 2, ''),
 (47, 'BSIS3B', 2, ''),
-(48, 'BSIS4A', 2, ''),
-(49, 'BSIS4B', 2, '');
+(48, 'BSIS4A', 2, 'CSE');
 
 -- --------------------------------------------------------
 
@@ -77,10 +76,9 @@ INSERT INTO `course` (`course_id`, `course_yrSec`, `dept_id`, `major`) VALUES
 --
 
 CREATE TABLE `day` (
-  `day_id` int(10) NOT NULL auto_increment,
-  `day_name` text NOT NULL,
-  PRIMARY KEY  (`day_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `day_id` int(10) NOT NULL,
+  `day_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `day`
@@ -100,21 +98,21 @@ INSERT INTO `day` (`day_id`, `day_name`) VALUES
 --
 
 CREATE TABLE `dept` (
-  `dept_id` tinyint(5) NOT NULL auto_increment,
+  `dept_id` tinyint(5) NOT NULL,
   `department` varchar(70) NOT NULL,
   `dept_person` varchar(30) NOT NULL,
-  `title` varchar(30) NOT NULL,
-  PRIMARY KEY  (`dept_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `title` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dept`
 --
 
 INSERT INTO `dept` (`dept_id`, `department`, `dept_person`, `title`) VALUES
-(1, 'College of Education', 'Dr. Binales', 'Dean'),
-(2, 'College of Industrial Technology', 'Dr. Sobrepena', 'Dean, CIT'),
-(3, 'School of Arts and Sciences', 'Ms. Tejada', 'Dean');
+(1, 'CSE', 'Dr. Binales', 'Dean'),
+(2, 'EE', 'Dr. Sobrepena', 'Dean, CIT'),
+(3, 'SS', 'Ms. Tejada', 'Dean'),
+(6, 'Maths', 'ABV', 'SS');
 
 -- --------------------------------------------------------
 
@@ -123,13 +121,12 @@ INSERT INTO `dept` (`dept_id`, `department`, `dept_person`, `title`) VALUES
 --
 
 CREATE TABLE `profile` (
-  `teacher_id` int(5) NOT NULL auto_increment,
+  `teacher_id` int(5) NOT NULL,
   `teacher_name` text NOT NULL,
   `acad_rank` varchar(30) NOT NULL,
   `designation` varchar(30) NOT NULL,
-  `dept_id` int(4) NOT NULL,
-  PRIMARY KEY  (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `dept_id` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `profile`
@@ -150,7 +147,8 @@ INSERT INTO `profile` (`teacher_id`, `teacher_name`, `acad_rank`, `designation`,
 (12, 'Mr. Joemar Pabuaya ', '', '', 2),
 (13, 'Ms. A. Arandilla ', '', '', 2),
 (14, 'Mr. G. Gumata', '', '', 2),
-(15, 'Teacher B ', '', '', 2);
+(15, 'Teacher B ', '', '', 2),
+(16, 'samar', '1', 'ap', 3);
 
 -- --------------------------------------------------------
 
@@ -159,11 +157,10 @@ INSERT INTO `profile` (`teacher_id`, `teacher_name`, `acad_rank`, `designation`,
 --
 
 CREATE TABLE `room` (
-  `room_id` int(10) NOT NULL auto_increment,
+  `room_id` int(10) NOT NULL,
   `room_name` varchar(20) NOT NULL,
-  `room_desc` varchar(30) NOT NULL,
-  PRIMARY KEY  (`room_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `room_desc` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `room`
@@ -177,7 +174,8 @@ INSERT INTO `room` (`room_id`, `room_name`, `room_desc`) VALUES
 (5, 'Room 314', 'Lecture Room'),
 (6, 'Room 401', 'Lecture Room'),
 (7, 'Room 402', 'Computer Lab'),
-(9, 'Room 313', 'Computer Laboratory');
+(9, 'Room 313', 'Computer Laboratory'),
+(10, '2102', 'class I');
 
 -- --------------------------------------------------------
 
@@ -186,7 +184,7 @@ INSERT INTO `room` (`room_id`, `room_name`, `room_desc`) VALUES
 --
 
 CREATE TABLE `sched` (
-  `sched_id` int(10) NOT NULL auto_increment,
+  `sched_id` int(10) NOT NULL,
   `room_id` int(10) NOT NULL,
   `course_id` int(5) NOT NULL,
   `sub_id` int(10) NOT NULL,
@@ -196,9 +194,8 @@ CREATE TABLE `sched` (
   `day_id` int(10) NOT NULL,
   `sem_id` int(10) NOT NULL,
   `year_id` int(10) NOT NULL,
-  `dept_id` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`sched_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=218 ;
+  `dept_id` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sched`
@@ -390,7 +387,10 @@ INSERT INTO `sched` (`sched_id`, `room_id`, `course_id`, `sub_id`, `teacher_id`,
 (214, 6, 48, 27, 11, 7, 0, 5, 1, 3, 2),
 (215, 6, 49, 27, 11, 9, 0, 1, 1, 3, 2),
 (216, 6, 49, 27, 11, 9, 0, 3, 1, 3, 2),
-(217, 6, 49, 27, 11, 9, 0, 5, 1, 3, 2);
+(217, 6, 49, 27, 11, 9, 0, 5, 1, 3, 2),
+(218, 10, 35, 19, 7, 1, 0, 1, 1, 6, 1),
+(219, 10, 35, 19, 7, 1, 0, 1, 1, 1, 1),
+(220, 4, 35, 19, 7, 1, 0, 2, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -399,10 +399,9 @@ INSERT INTO `sched` (`sched_id`, `room_id`, `course_id`, `sub_id`, `teacher_id`,
 --
 
 CREATE TABLE `school_yr` (
-  `year_id` int(10) NOT NULL auto_increment,
-  `school_year` varchar(20) NOT NULL,
-  PRIMARY KEY  (`year_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `year_id` int(10) NOT NULL,
+  `school_year` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `school_yr`
@@ -412,7 +411,8 @@ INSERT INTO `school_yr` (`year_id`, `school_year`) VALUES
 (1, '2009-2010'),
 (3, '2010-2011'),
 (4, '2011-2012'),
-(5, '2012-2013');
+(5, '2012-2013'),
+(6, '2015-2016');
 
 -- --------------------------------------------------------
 
@@ -421,10 +421,9 @@ INSERT INTO `school_yr` (`year_id`, `school_year`) VALUES
 --
 
 CREATE TABLE `sem` (
-  `sem_id` int(2) NOT NULL auto_increment,
-  `semester` varchar(20) NOT NULL,
-  PRIMARY KEY  (`sem_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `sem_id` int(2) NOT NULL,
+  `semester` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sem`
@@ -441,7 +440,7 @@ INSERT INTO `sem` (`sem_id`, `semester`) VALUES
 --
 
 CREATE TABLE `subjects` (
-  `sub_id` int(10) NOT NULL auto_increment,
+  `sub_id` int(10) NOT NULL,
   `sub_code` varchar(20) NOT NULL,
   `sub_name` varchar(50) NOT NULL,
   `sub_labhrsprday` tinyint(2) NOT NULL,
@@ -450,9 +449,8 @@ CREATE TABLE `subjects` (
   `cys` varchar(50) NOT NULL,
   `prereq` varchar(20) NOT NULL,
   `sem_id` tinyint(2) NOT NULL,
-  `dept_id` int(4) NOT NULL,
-  PRIMARY KEY  (`sub_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+  `dept_id` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `subjects`
@@ -482,7 +480,8 @@ INSERT INTO `subjects` (`sub_id`, `sub_code`, `sub_name`, `sub_labhrsprday`, `su
 (24, 'IS305', 'Operating System	', 3, 2, 1, '46', '0', 1, 2),
 (25, 'IS500', 'Capstone Project', 0, 3, 1, '45', '0', 1, 2),
 (26, 'IS304	', 'IS Elective4 (Effective Human Comm.)', 0, 3, 1, '47', '0', 1, 2),
-(27, 'IS107', 'Introduction to the IM Profession and Ethics', 0, 3, 1, '49', '0', 1, 2);
+(27, 'IS107', 'Introduction to the IM Profession and Ethics', 0, 3, 1, '49', '0', 1, 2),
+(28, 'MA111', 'Calculus & Real Analysis', 0, 4, 1, '23', 'NIL', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -491,10 +490,9 @@ INSERT INTO `subjects` (`sub_id`, `sub_code`, `sub_name`, `sub_labhrsprday`, `su
 --
 
 CREATE TABLE `sub_category` (
-  `subcat_id` tinyint(2) NOT NULL auto_increment,
-  `sub_cat` varchar(20) NOT NULL,
-  PRIMARY KEY  (`subcat_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `subcat_id` tinyint(2) NOT NULL,
+  `sub_cat` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sub_category`
@@ -511,30 +509,21 @@ INSERT INTO `sub_category` (`subcat_id`, `sub_cat`) VALUES
 --
 
 CREATE TABLE `timestart` (
-  `time_s_id` int(10) NOT NULL auto_increment,
-  `time_s` varchar(20) NOT NULL,
-  PRIMARY KEY  (`time_s_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+  `time_s_id` int(10) NOT NULL,
+  `time_s` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `timestart`
 --
 
 INSERT INTO `timestart` (`time_s_id`, `time_s`) VALUES
-(1, '07:30 am'),
-(3, '08:30 am'),
-(5, '09:30 am'),
-(7, '10:30 am'),
-(9, '11:30 am'),
-(11, '12:30 pm'),
-(13, '01:30 pm'),
-(15, '02:30 pm'),
-(17, '03:30 pm'),
-(19, '04:30 pm'),
-(21, '05:30 pm'),
-(23, '06:30 pm'),
-(25, '07:30 pm'),
-(27, '08:30 pm');
+(1, '08:00 am'),
+(3, '09:00 am'),
+(5, '10:00 am'),
+(7, '11:00 am'),
+(9, '12:00 am'),
+(11, '01:00 pm');
 
 -- --------------------------------------------------------
 
@@ -543,22 +532,172 @@ INSERT INTO `timestart` (`time_s_id`, `time_s`) VALUES
 --
 
 CREATE TABLE `user` (
-  `user_id` int(12) NOT NULL auto_increment,
+  `user_id` int(12) NOT NULL,
   `username` varchar(30) NOT NULL,
   `userpass` varchar(20) NOT NULL,
   `dept_id` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  `year` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `userpass`, `dept_id`) VALUES
-(1, 'admin', 'a', 4),
-(7, 'student', 'stud', 2),
-(8, 'faculty', 'fac', 1),
-(9, 'sas', 'sas', 3),
-(10, 'deancit', 'd', 42),
-(11, 'deaneduc', 'd', 41),
-(12, 'deansas', 'd', 43);
+INSERT INTO `user` (`user_id`, `username`, `userpass`, `dept_id`, `year`) VALUES
+(1, 'admin', 'a', 4, 0),
+(7, 'student', 'stud', 2, 1),
+(8, 'faculty', 'fac', 1, 0),
+(9, 'sas', 'sas', 3, 2),
+(10, 'deancit', 'd', 4, 3),
+(11, 'deaneduc', 'd', 4, 4),
+(12, 'deansas', 'd', 3, 1),
+(13, 'staff', 'staff', 4, 2),
+(14, 'local', 'local', 4, 3),
+(15, 'local', 'local', 1, 4),
+(16, 'abc', 'abc', 2, 1),
+(17, 'user1', 'user1', 1, 2),
+(18, 'avinash', 'av', 1, 3);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`course_id`);
+
+--
+-- Indexes for table `day`
+--
+ALTER TABLE `day`
+  ADD PRIMARY KEY (`day_id`);
+
+--
+-- Indexes for table `dept`
+--
+ALTER TABLE `dept`
+  ADD PRIMARY KEY (`dept_id`);
+
+--
+-- Indexes for table `profile`
+--
+ALTER TABLE `profile`
+  ADD PRIMARY KEY (`teacher_id`);
+
+--
+-- Indexes for table `room`
+--
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`room_id`);
+
+--
+-- Indexes for table `sched`
+--
+ALTER TABLE `sched`
+  ADD PRIMARY KEY (`sched_id`);
+
+--
+-- Indexes for table `school_yr`
+--
+ALTER TABLE `school_yr`
+  ADD PRIMARY KEY (`year_id`);
+
+--
+-- Indexes for table `sem`
+--
+ALTER TABLE `sem`
+  ADD PRIMARY KEY (`sem_id`);
+
+--
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`sub_id`);
+
+--
+-- Indexes for table `sub_category`
+--
+ALTER TABLE `sub_category`
+  ADD PRIMARY KEY (`subcat_id`);
+
+--
+-- Indexes for table `timestart`
+--
+ALTER TABLE `timestart`
+  ADD PRIMARY KEY (`time_s_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `course`
+--
+ALTER TABLE `course`
+  MODIFY `course_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT for table `day`
+--
+ALTER TABLE `day`
+  MODIFY `day_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `dept`
+--
+ALTER TABLE `dept`
+  MODIFY `dept_id` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `profile`
+--
+ALTER TABLE `profile`
+  MODIFY `teacher_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `room`
+--
+ALTER TABLE `room`
+  MODIFY `room_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `sched`
+--
+ALTER TABLE `sched`
+  MODIFY `sched_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
+--
+-- AUTO_INCREMENT for table `school_yr`
+--
+ALTER TABLE `school_yr`
+  MODIFY `year_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `sem`
+--
+ALTER TABLE `sem`
+  MODIFY `sem_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `sub_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT for table `sub_category`
+--
+ALTER TABLE `sub_category`
+  MODIFY `subcat_id` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `timestart`
+--
+ALTER TABLE `timestart`
+  MODIFY `time_s_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
