@@ -287,7 +287,7 @@
                       <option value="<?php echo $row['dept_id'];?>"><?php echo $row['department'];?> </option>
                       <?php } while ($row = mysql_fetch_assoc($result)); ?>
                     </select>
-                    
+                    <!--
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
