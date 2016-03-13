@@ -24,14 +24,21 @@
 	
 			$sub_id =$_REQUEST['sub_id'];
 			
-			$result = mysql_query("SELECT * FROM `subjects` WHERE `sub_id` = '$sub_id'");  
+			$result = mysqli_query($conn,"SELECT * FROM `subjects` WHERE `sub_id` = '$sub_id'");  
 		  
-						
+						function mysqli_result($result, $row, $field = 0) {
+    // Adjust the result pointer to that specific row
+    $result->data_seek($row);
+    // Fetch result array
+    $data = $result->fetch_array();
+ 
+    return $data[$field];
+}
 		if (!$result) 
 				{
 				die("Query to show fields from table failed");
 				}
-					$numberOfRows = MYSQL_NUMROWS($result);
+					$numberOfRows = MYSQLi_NUM_ROWS($result);
 			
 					If ($numberOfRows == 0) 
 						{
@@ -40,16 +47,16 @@
 					else if ($numberOfRows > 0) 
 						{
 						$i=0;
-					$sub_id = MYSQL_RESULT($result,$i,"sub_id");	
-					$sub_code = MYSQL_RESULT($result,$i,"sub_code");
-					$sub_name = MYSQL_RESULT($result,$i,"sub_name");
-					$sub_lechrsprday = MYSQL_RESULT($result,$i,"sub_lechrsprday");
-					$sub_labhrsprday = MYSQL_RESULT($result,$i,"sub_labhrsprday");
-					$subcat_id = MYSQL_RESULT($result,$i,"subcat_id");
-					$cys = MYSQL_RESULT($result,$i,"cys");
-					$prereq = MYSQL_RESULT($result,$i,"prereq");
-					$sem = MYSQL_RESULT($result,$i,"sem_id");
-					$department = MYSQL_RESULT($result,$i,"dept_id");
+					$sub_id = mysqli_result($result,$i,"sub_id");	
+					$sub_code = mysqli_result($result,$i,"sub_code");
+					$sub_name = mysqli_result($result,$i,"sub_name");
+					$sub_lechrsprday = mysqli_result($result,$i,"sub_lechrsprday");
+					$sub_labhrsprday = mysqli_result($result,$i,"sub_labhrsprday");
+					$subcat_id = mysqli_result($result,$i,"subcat_id");
+					$cys = mysqli_result($result,$i,"cys");
+					$prereq = mysqli_result($result,$i,"prereq");
+					$sem = mysqli_result($result,$i,"sem_id");
+					$department = mysqli_result($result,$i,"dept_id");
 					
 		
 						
@@ -280,7 +287,7 @@
                       <option value="<?php echo $row['dept_id'];?>"><?php echo $row['department'];?> </option>
                       <?php } while ($row = mysql_fetch_assoc($result)); ?>
                     </select>
-                    <!-- 
+                    
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
@@ -310,7 +317,7 @@
 	  </div>
 	</div>
 	
-	<div id="footer">Copyright © 2009 </div>	
+	<div id="footer">Four Dark Riders </div>	
 </div>
 </body>
 </html>
