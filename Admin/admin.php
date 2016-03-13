@@ -125,7 +125,7 @@ include("../includes/session.php");
 		  <p>&nbsp;</p>
 	  </div>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling System</a><a href="www.chmsc.edu.ph"></a></span></p>
+		 <!-- <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling System</a><a href="www.chmsc.edu.ph"></a></span></p>-->
 	  </div>
 	</div>
 	

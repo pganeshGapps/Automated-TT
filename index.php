@@ -204,7 +204,7 @@ else
 
 <body>
 <div id="container">
-  <div id="header">
+  <div id="header" width="500 px">
     <div id="logo_w2" align="left"><img src="images/logo copy.jpg" /> </div>
     <ul class="cssMenu cssMenum">
 	<!--<li class=" cssMenui"><a class="  cssMenui" href="index.php"><img src="images/homepage.gif" />Home</a></li>-->
