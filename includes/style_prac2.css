@@ -1,5 +1,5 @@
 body {
-	background-color:#a6bf79; 
+	background-color:#f48322; 
 	color:#003399;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -44,7 +44,7 @@ ul.cssMenu,ul.cssMenu ul {
  	position: absolute;left:1px;top:155px;
 	list-style:none;
 	padding:0px 2px 2px 0px;
-	background-color:#85a157;
+	background-color:#0000ff;
 	background-repeat:repeat;
 	border-color:#AAAAAA;
 	border-width:1px;
@@ -55,7 +55,7 @@ ul.cssMenu,ul.cssMenu ul {
 }
 ul.cssMenu table {border-collapse:collapse}ul.cssMenu {
 	text-align:center;
-	background-color:#85a157;
+	background-color:#0000ff;
 	background-repeat:repeat;
 	height:32px;
 	border: 3px solid #FFFFFF;
@@ -67,7 +67,7 @@ ul.cssMenu table {border-collapse:collapse}ul.cssMenu {
 ul.cssMenu ul{
 	width:165.95000000000002px;
 	position: absolute;left:0px;top:22px;
-	background-color:#85a157;
+	background-color:#0000ff;
 	background-repeat:repeat;
 	border-color:#AAAAAA;
 	border-width:1px;
@@ -89,7 +89,7 @@ ul.cssMenu a, ul.cssMenu li.dis a:hover, ul.cssMenu li.sep a:hover {
 	
 	display:block;
 	vertical-align:middle;
-	background-color:#85a157;
+	background-color:#0000ff;
 	border-width:0px;
 	border-color:#6655ff;
 	border-style:solid;
@@ -147,7 +147,7 @@ ul.cssMenu li a:hover{
 	border-color:#665500;
 	border-style:solid;
 	font:12.5px Verdana;
-	color: #28556b;
+	color: #ffcccc;
 	text-decoration:none;
 }
 ul.cssMenu li.dis a {
@@ -184,7 +184,7 @@ ul.cssMenu table a:hover table span{background-image:url(../images/arr_double_1.
 
 /* Sub Menu Hover Styles */
 #header li ul a:hover { 
-	color:#28556b;; 
+	color:#ffcccc;; 
 	background: #; 
 } 
 
@@ -209,7 +209,7 @@ ul.cssMenu table a:hover table span{background-image:url(../images/arr_double_1.
 	color:#FFFFFF;
 }
 #header_text a{color:#28556b;}
-#header_text a:hover{color:#c77e0c;}
+#header_text a:hover{color:#ffffff;}
 /********************** Content ***************************/
 #content {
 	background-image:url(../images/content_bg.gif);
