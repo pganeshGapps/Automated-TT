@@ -74,7 +74,7 @@ require ("../includes/dbconnection.php");
 			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<!-- Add School Year -->
+		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" /> </span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
 
 			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
@@ -111,11 +111,10 @@ require ("../includes/dbconnection.php");
                 <td width="90" nowrap="nowrap" bgcolor="#CCCCCC"><span class="style25">Course Code|</span></td>
                 <td width="344" nowrap="nowrap" bgcolor="#CCCCCC"><span class="style25">Course Name </span></td>
                 <td width="50" nowrap="nowrap" bgcolor="#CCCCCC"><span class="style25">Lec hrs</span></td>
-                <td width="28" nowrap="nowrap" bgcolor="#CCCCCC"><span class="style25">|Unit|</span></td>
-                <td width="98" nowrap="nowrap" bgcolor="#CCCCCC"><span class="style25"> Pre req</span></td>
+                <!--<td width="28" nowrap="nowrap" bgcolor="#CCCCCC"><span class="style25">|Unit|</span></td>
+                <td width="98" nowrap="nowrap" bgcolor="#CCCCCC"><span class="style25">Pre Req </span></td>    -->
 				
-                <td width="12" nowrap="nowrap" bgcolor="#CCCCCC">&nbsp;</td>
-                <td width="16" nowrap="nowrap" bgcolor="#CCCCCC">&nbsp;</td>
+                <td width="12" nowrap="nowrap" bgcolor="#CCCCCC"><span class="style25">Instructor</span></td>
                 <?php 
 				
 				function mysql_result($result, $row, $field = 0) {
@@ -157,6 +156,11 @@ else if ($numberOfRows > 0)
 			$sub_name = MYSQL_RESULT($result,$i,"sub_name");
 			$sub_lechrsprday = MYSQL_RESULT($result,$i,"sub_lechrsprday");
 			$sub_labhrsprday = MYSQL_RESULT($result,$i,"sub_labhrsprday");
+			$sub_instructor_id= MYSQL_RESULT($result,$i,"instructor");
+				$result2=mysqli_query($conn,"SELECT teacher_name from profile WHERE teacher_id = '$sub_instructor_id' ");
+				$row2 = mysqli_fetch_array($result2);
+				$sub_instr_name= $row2['teacher_name'];
+			
 			$prereq = MYSQL_RESULT($result,$i,"prereq");
 			
 			
@@ -166,8 +170,7 @@ else if ($numberOfRows > 0)
                 <td nowrap="nowrap"><?php echo $sub_code; ?></td>
                 <td nowrap="nowrap"><?php echo $sub_name; ?></td>
                 <td nowrap="nowrap"><?php echo $sub_lechrsprday; ?></td>
-                <td nowrap="nowrap"><?php echo $sub_labhrsprday; ?></td>
-                <td nowrap="nowrap"><?php echo $prereq; ?></td>
+                <td nowrap="nowrap"><?php echo $sub_instr_name; ?></td>
                 <td><a href="subject-edit-a.php?sub_id=<?php echo $sub_id; ?>"> <img src='../images/b_edit.png' alt="edit record" width="16" height="16" /></a></td>
                 <td><a href="subject-del-a.php?sub_id=<?php echo $sub_id; ?>"> <img src='../images/b_drop.png' alt="delete record" width="16" height="16" onclick="return confirm(' <?php echo "Are you sure you want to delete " . $sub_code. "?";?>');" /></a></td>
               </tr>
