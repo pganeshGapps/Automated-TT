@@ -1,6 +1,5 @@
 <?php
    session_start();
    
-   echo 'You have been logged out!!';
-   header('Refresh: 2; URL = ../index.php');
+   header('Refresh: 2; URL = login.php');
 ?>

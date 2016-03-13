@@ -23,14 +23,21 @@ include("../includes/session.php");
   
   $dept_id =$_REQUEST['Dept'];
   
-			$result = mysql_query("SELECT * FROM `dept` WHERE `dept_id` = '$dept_id'");  
-	
+			$result = mysqli_query($conn,"SELECT * FROM `dept` WHERE `dept_id` = '$dept_id'");  
+	function mysqli_result($result, $row, $field = 0) {
+    // Adjust the result pointer to that specific row
+    $result->data_seek($row);
+    // Fetch result array
+    $data = $result->fetch_array();
+ 
+    return $data[$field];
+}
 	
 	if (!$result) 
 		{
 		die("Query to show fields from table failed");
 		}
-			$numberOfRows = MYSQL_NUMROWS($result);
+			$numberOfRows = MYSQLi_NUM_ROWS($result);
 	
 			If ($numberOfRows == 0) 
 				{
@@ -40,9 +47,9 @@ include("../includes/session.php");
 				{
 				$i=0;
 					
-			$dept = MYSQL_RESULT($result,$i,"department");
-			$person = MYSQL_RESULT($result,$i,"dept_person");
-			$title = MYSQL_RESULT($result,$i,"title");
+			$dept = mysqli_result($result,$i,"department");
+			$person = mysqli_result($result,$i,"dept_person");
+			$title = mysqli_result($result,$i,"title");
 			
 				}
 ?>
@@ -56,8 +63,8 @@ include("../includes/session.php");
 			$title = $_POST['txttitle'];
 		
 
-			mysql_query( "UPDATE dept SET department = '$dept', dept_person = '$person', title ='$title'  WHERE dept_id = '$dept_id'")
-		             or die(mysql_error()); 
+			mysqli_query($conn, "UPDATE dept SET department = '$dept', dept_person = '$person', title ='$title'  WHERE dept_id = '$dept_id'")
+		             or die(mysqli_error($conn)); 
 					echo "files has been updated in the database.."; 
 								 header(
 			 		"Location: deptlist-a.php");
@@ -119,7 +126,7 @@ include("../includes/session.php");
 			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" />School Year</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<!-- Add School Year -->
 		<ul class=" cssMenum">
 
 			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
