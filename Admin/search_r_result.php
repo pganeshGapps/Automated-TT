@@ -130,6 +130,14 @@
 		    <p align="center">
 		      <?php 	$pSy =$_REQUEST['pSy'];				
 				$result = mysqli_query($conn,"SELECT * FROM school_yr HAVING year_id='$pSy'");
+				function mysqli_result($result, $row, $field = 0) {
+    // Adjust the result pointer to that specific row
+    $result->data_seek($row);
+    // Fetch result array
+    $data = $result->fetch_array();
+ 
+    return $data[$field];
+}
 				
 if (!$result) 
 		{
@@ -145,7 +153,7 @@ if (!$result)
 				{
 				$i=0;
 			
-			$sy = mysqli_RESULT($result,$i,"school_year");
+			$sy = mysqli_result($result,$i,"school_year");
 				/*mysqli_data_seek($result,0);
 				$row=mysqli_fetch_assoc($result);
 			    $sy = $rows["school_year"];*/
@@ -169,10 +177,10 @@ if (!$result)
 			###########
 			//$sem = mysqli_RESULT($result,$i,"semester");
 			// Seek to row number 0
-  			mysqli_data_seek($result,0);
-			$row=mysqli_fetch_assoc($result);
-		    $sem = $rows["semester"];
-			
+  			//mysqli_data_seek($result,0);
+			//$row=mysqli_fetch_assoc($result);
+		   // $sem = $rows["semester"];
+			$sem = mysqli_result($result,$i,"semester");
 				}
 				echo $sem.', '. $sy;?>
 		    </p>
@@ -197,12 +205,12 @@ if (!$result)
 				{
 				$i=0;
 			
-			//$room = MYSQL_RESULT($result,$i,"room_name");
+			//$room = mysqli_result($result,$i,"room_name");
 				// Seek to row number 0
-  			mysqli_data_seek($result,0);
-			$row=mysqli_fetch_assoc($result);
-		    $room = $rows["semester"];
-				
+  			//mysqli_data_seek($result,0);
+			//$row=mysqli_fetch_assoc($result);
+		    //$room = $rows["semester"];
+			$room = mysqli_result($result,$i,"room_name");	
 				}
 				
 				 echo $room; ?></span></td>
@@ -249,26 +257,26 @@ if (!$result)
 						}		
 			
 			/*SELECT * FROM `sched` WHERE 1`sched_id``room_id``course_id``sub_id``teacher_id``time_s_id``time_e_id``day_id``sem_id``year_id``sched_desc` */
-				/*	$sched_id = MYSQL_RESULT($result,$i,"sched_id");
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_psy = MYSQL_RESULT($result,$i,"school_year");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_name");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s");  */
+					$sched_id = mysqli_result($result,$i,"sched_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_psy = mysqli_result($result,$i,"school_year");
+					$hidden_pday = mysqli_result($result,$i,"day_name");
+					$hidden_pstime = mysqli_result($result,$i,"time_s");  
 					
 					// Seek to row number i
-  			mysqli_data_seek($result,i);
-			$row=mysqli_fetch_assoc($result);
+  			//mysqli_data_seek($result,$i);
+			//$rows=mysqli_fetch_assoc($result);
 		    //$sy = $rows["semester"];
 			
-					$sched_id = rows["sched_id"];
+					/*$sched_id = rows["sched_id"];
 					$hidden_psubcat =  rows["sub_code"];
 					$hidden_pt =  rows["teacher_name"];
 					$hidden_pcourse =  rows["course_yrSec"];
 					$hidden_psy =  rows["schoolyear"];
 					$hidden_pday =  rows["day_name"];
-					$hidden_pstime =  rows["time_s"];
+					$hidden_pstime =  rows["time_s"];*/
 					
 					
 		?>
@@ -334,12 +342,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 1){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -376,12 +384,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 1){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -418,12 +426,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 1){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -460,12 +468,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 1){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -502,12 +510,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 1){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -548,12 +556,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 3){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -590,12 +598,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 3){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -632,12 +640,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 3){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -674,12 +682,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 3){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -716,12 +724,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 3){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -762,12 +770,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 5){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -804,12 +812,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 5){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -846,12 +854,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 5){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -888,12 +896,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 5){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -930,12 +938,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 5){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -976,12 +984,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 7){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1018,12 +1026,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2&& $hidden_pstime == 7){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1060,12 +1068,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 7){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1102,12 +1110,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 7){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1144,12 +1152,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 7){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1190,12 +1198,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 9){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1232,12 +1240,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 9){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1274,12 +1282,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 9){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1316,12 +1324,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 9){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1358,12 +1366,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 9){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1404,12 +1412,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 11){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1446,12 +1454,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 11){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1488,12 +1496,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 11){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1530,12 +1538,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 11){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1572,12 +1580,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 11){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1618,12 +1626,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 13){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1660,12 +1668,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 13){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1702,12 +1710,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 13){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1744,12 +1752,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 13){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1786,12 +1794,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 13){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1832,12 +1840,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 15){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1874,12 +1882,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 15){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1916,12 +1924,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 15){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -1958,12 +1966,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 15){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2000,12 +2008,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 15){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2046,12 +2054,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 17){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2088,12 +2096,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 17){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2130,12 +2138,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 17){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2172,12 +2180,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 17){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2214,12 +2222,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 17){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2260,12 +2268,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 19){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2302,12 +2310,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 19){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2344,12 +2352,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 19){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2386,12 +2394,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 19){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2428,12 +2436,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 19){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2474,12 +2482,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 21){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2516,12 +2524,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 21){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2558,12 +2566,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 21){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2600,12 +2608,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 21){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2642,12 +2650,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 21){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2688,12 +2696,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 23){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2730,12 +2738,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 23){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2772,12 +2780,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 23){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2814,12 +2822,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 23){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2856,12 +2864,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 23){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2902,12 +2910,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 1 && $hidden_pstime == 25){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2944,12 +2952,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 2 && $hidden_pstime == 25){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -2986,12 +2994,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 3 && $hidden_pstime == 25){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -3028,12 +3036,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 4 && $hidden_pstime == 25){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;
@@ -3070,12 +3078,12 @@ if (!$result)
 			while ($i<$numberOfRows)
 				{			
 
-					$hidden_psubcat = MYSQL_RESULT($result,$i,"sub_code");
-					$hidden_pcourse = MYSQL_RESULT($result,$i,"course_yrSec");
-					$hidden_proom = MYSQL_RESULT($result,$i,"room_name");
-					$hidden_pt = MYSQL_RESULT($result,$i,"teacher_name");
-					$hidden_pday = MYSQL_RESULT($result,$i,"day_id");
-					$hidden_pstime = MYSQL_RESULT($result,$i,"time_s_id");
+					$hidden_psubcat = mysqli_result($result,$i,"sub_code");
+					$hidden_pcourse = mysqli_result($result,$i,"course_yrSec");
+					$hidden_proom = mysqli_result($result,$i,"room_name");
+					$hidden_pt = mysqli_result($result,$i,"teacher_name");
+					$hidden_pday = mysqli_result($result,$i,"day_id");
+					$hidden_pstime = mysqli_result($result,$i,"time_s_id");
 			 
 			 if ($hidden_pday == 5 && $hidden_pstime == 25){	
 			  		echo $hidden_psubcat . '<br>'.$hidden_pcourse . '<br>'.$hidden_pt;

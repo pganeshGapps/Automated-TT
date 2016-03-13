@@ -37,8 +37,8 @@ if (($flagcourse == "") &&  ($flagdept == ""))
 			$department = $_POST['hidden_dept_id'];
 		
 
-			mysqli_query ("INSERT INTO course(course_yrSec, major, dept_id)
-					VALUES('$course','$major','$department')") or die(mysqli_error()); 
+			mysqli_query ($conn,"INSERT INTO course(course_yrSec, major, dept_id)
+					VALUES('$course','$major','$department')") or die(mysqli_error($conn)); 
 					echo "Your file has been saved in the database..";
 					 header(
 			 	"Location: student-list-a.php");
