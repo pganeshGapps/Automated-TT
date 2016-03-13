@@ -20,15 +20,34 @@
 include("../includes/session.php");
   require ("../includes/dbconnection.php");
   
+  function mysqli_result($result, $row, $field = 0) {
+    // Adjust the result pointer to that specific row
+    $result->data_seek($row);
+    // Fetch result array
+    $data = $result->fetch_array();
+ 
+    return $data[$field];
+}
+  
+  function mysql_result($result, $row, $field = 0) {
+    // Adjust the result pointer to that specific row
+    $result->data_seek($row);
+    // Fetch result array
+    $data = $result->fetch_array();
+ 
+    return $data[$field];
+}
+  
+  
 	$room_id =$_REQUEST['Room'];
 	
-		$result =  mysql_query("SELECT * FROM room WHERE room_id  = '$room_id'");
+		$result =  mysqli_query($conn,"SELECT * FROM room WHERE room_id  = '$room_id'");
 				
 if (!$result) 
 		{
 		die("Query to show fields from table failed");
 		}
-			$numberOfRows = MYSQL_NUMROWS($result);
+			$numberOfRows = mysqli_num_rows($result);
 	
 			If ($numberOfRows == 0) 
 				{
@@ -40,6 +59,8 @@ if (!$result)
 				
 		 	$room= MYSQL_RESULT($result,$i,"room_name");
 			$desc= MYSQL_RESULT($result,$i,"room_desc");
+			$isNKN= mysqli_result($result,$i,"room_isNKN");
+			$room_size= mysqli_result($result,$i,"room_size");
 				
 				}
 				?>
@@ -52,10 +73,11 @@ if (!$result)
 			
 		 	$room_a= $_POST['txtroom'];
 			$desc_a= $_POST['txtdesc'];
-		
+			$isNKN_a=$_POST['txtIsNKN'];
+			$room_size=$_POST['txtRoomSize'];
 
-			mysql_query ("UPDATE room SET room_name = '$room_a',  room_desc = '$desc_a'  WHERE room_id  = '$room_id'")
-					 or die(mysql_error()); 
+			mysqli_query ($conn,"UPDATE room SET room_name = '$room_a',  room_desc = '$desc_a' ,room_isNKN='$isNKN_a',room_size='$room_size' WHERE room_id  = '$room_id'")
+					 or die(mysqli_error($result)); 
 					echo "Your file has been saved in the database..";
 							header(
 			 "Location: roomlist-a.php");
@@ -120,7 +142,7 @@ if (!$result)
 			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" />School Year</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" /> </span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
 
 			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
@@ -158,6 +180,21 @@ if (!$result)
                 <td width="109">&nbsp;</td>
                 <td width="5">&nbsp;</td>
               </tr>
+              
+               <tr >
+                <td width="111" height="34"  ><div align="right" class="style3">isNKN? </div></td>
+                <td width="177" ><input type="text" name="txtIsNKN" id="txtIsNKN" value="<?php echo $isNKN; ?>" /></td>
+                <td width="109">&nbsp;</td>
+                <td width="5">&nbsp;</td>
+              </tr>
+              
+               <tr >
+                <td width="111" height="34"  ><div align="right" class="style3">Capacity</div></td>
+                <td width="177" ><input type="text" name="txtRoomSize" id="txtRoomSize" value="<?php echo $room_size; ?>" /></td>
+                <td width="109">&nbsp;</td>
+                <td width="5">&nbsp;</td>
+              </tr>
+              
               <tr >
                 <td height="35"><div align="right" class="style3">Description </div></td>
                 <td><label></label>
@@ -167,6 +204,9 @@ if (!$result)
                 <td><span class="style20">&nbsp;</span></td>
                 <td>&nbsp;</td>
               </tr>
+              
+              
+              
               <tr>
                 <td height="19" colspan="4">&nbsp;</td>
               </tr>
@@ -187,12 +227,14 @@ if (!$result)
 		  <p>&nbsp;</p>
 	  </div>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_dev.php">Developer</a>| <a href="about_sched.php">Scheduling System</a>| <a href="contact.html">Contact Us</a>| <a href="www.chmsc.edu.ph">CHMSC </a></span></p>
+		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling 	                                System</a>
+                            </span>
+          </p>
 	  </div>
 	</div>
 	
-	<div id="footer">Copyright © 2009 </div>	
-</div>
+	<div id="footer">Four Dark Riders</div>		
+</div>	
 </body>
 </html>
 

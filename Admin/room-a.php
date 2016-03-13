@@ -35,9 +35,10 @@ if (($flagroom == "") &&  ($flagcap == "") &&  ($flagdesc == ""))
 			
 		 	$room= $_POST['txtroom'];
 			$desc= $_POST['txtdesc'];
-		
-			mysqli_query ($conn,"INSERT INTO room(room_name, room_desc)
-					VALUES('$room','$desc')") or die(mysqli_error()); 
+			$room_isNKN= $_POST['txtIsNKN'];
+			$room_size= $_POST['txtSize'];
+			mysqli_query ($conn,"INSERT INTO room(room_name, room_desc,room_isNKN,room_size)
+					VALUES('$room','$desc','$room_isNKN','$room_size')") or die(mysqli_error($conn)); 
 					echo "Your file has been saved in the database..";
 					 header(
 			 	"Location: roomlist-a.php");
@@ -103,7 +104,7 @@ if (($flagroom == "") &&  ($flagcap == "") &&  ($flagdesc == ""))
 			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" />School Year</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" /> </span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
 
 			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
@@ -142,6 +143,21 @@ if (($flagroom == "") &&  ($flagcap == "") &&  ($flagdesc == ""))
                 <td width="110"><span class="style20"><?php echo $flagroom; ?>&nbsp;</span></td>
                 <td width="1">&nbsp;</td>
               </tr>
+              
+              <tr >
+                <td width="175" height="41"  ><div align="right" class="style3">isNKN?(1 or 0)</div></td>
+                <td width="170" ><input type="text" name="txtIsNKN" id="txtIsNKN" value="<?php echo $room_isNKN; ?>" /></td>
+                <td width="110"><span class="style20"><?php echo $flagroom; ?>&nbsp;</span></td>
+                <td width="1">&nbsp;</td>
+              </tr>
+              
+              <tr >
+                <td width="175" height="41"  ><div align="right" class="style3">Size</div></td>
+                <td width="170" ><input type="text" name="txtSize" id="txtSize" value="<?php echo $room_size; ?>" /></td>
+                <td width="110"><span class="style20"><?php echo $flagroom; ?>&nbsp;</span></td>
+                <td width="1">&nbsp;</td>
+              </tr>
+              
               <tr >
                 <td height="43"><div align="right" class="style3">Description </div></td>
                 <td><label></label>
