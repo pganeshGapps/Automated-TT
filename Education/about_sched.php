@@ -78,15 +78,15 @@ include("../includes/session.php");
 	    <div align="center">
 		    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
               <br />
-		      <p><strong>Online Scheduling System for Carlos Hilado  Memorial State College</strong></p>
+		      <p><strong>Online Scheduling System for IIT Jodhpur</strong></p>
 		      <p>&nbsp;</p>
 		      <p align="center">Scheduling  plays an important role in every organization. Through efficient scheduling, an  organization will be able to achieve its goals and objectives on time which  helps a lot in the flow of business.</p>
 		      <p><br />
 	      </p><div id="Layer1">
 	        <p align="justify"><strong>Tools Used: </strong></p>
-  <p align="justify">In  developing the system, the developers used Macromedia Dreamweaver for editing  and Php and MySql language. </p>
-  <p align="justify"><strong>Functionality of the system:</strong></p>
-  <p align="justify">The  system is composed of 6 main forms with submenus. The Home menu is the main  page of the system. The Search Menu consists of three minor links; teacher,  student and room. The Add Entry has seven links; User, Teacher, Course,  Subject, Room and Department, School Year. The Schedule menu has Course, Year  and Section, semester and School Year, Teacher, Room, Day(s), Starting Time and  Ending Time and the Help menu.</p>
+  <p align="justify">In  developing the system, the developers used Php and MySql language. </p>
+ <!-- <p align="justify"><strong>Functionality of the system:</strong></p>
+  <p align="justify">The  system is composed of 6 main forms with submenus. The Home menu is the main  page of the system. The Search Menu consists of three minor links; teacher,  student and room. The Add Entry has seven links; User, Teacher, Course,  Subject, Room and Department, School Year. The Schedule menu has Course, Year  and Section, semester and School Year, Teacher, Room, Day(s), Starting Time and  Ending Time and the Help menu.</p>-->
   </div>
           </form>
         </div>
@@ -108,12 +108,12 @@ include("../includes/session.php");
 		  <p>&nbsp;</p>
 		  <p>&nbsp;</p>
 		</div>
-		<div id="footerline">
+		<!--<div id="footerline">
 		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_dev.php">Developer</a>| <a href="about_sched.php">Scheduling System</a>| <a href="contact.html">Contact Us</a>| <a href="www.chmsc.edu.ph">CHMSC </a></span></p>
-	  </div>
+	  </div>-->
 	</div>
 	
-	<div id="footer">Copyright © 2009 </div>	
+	<div id="footer">Four Dark Riders </div>	
 </div>
 </body>
 </html>
