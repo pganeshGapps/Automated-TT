@@ -7,7 +7,7 @@
 	
 	// sending query
 	mysqli_query($conn,"DELETE FROM subjects WHERE sub_id = '$sub_id'")
-	or die(mysqli_error($conn));  	
+	or die(mysqli_error());  	
 	
 	header("Location: subjectlist-a.php");
 ?>

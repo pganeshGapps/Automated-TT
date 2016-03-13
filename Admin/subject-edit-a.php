@@ -22,18 +22,22 @@
 	include("../includes/session.php");
 	require ("../includes/dbconnection.php");
 	
+	function mysql_result($result, $row, $field = 0) {
+ 			   // Adjust the result pointer to that specific row
+    			$result->data_seek($row);
+ 			   // Fetch result array
+ 			   $data = $result->fetch_array();
+ 
+ 			   return $data[$field];
+				}	
+				
+				
+	
 			$sub_id =$_REQUEST['sub_id'];
 			
 			$result = mysqli_query($conn,"SELECT * FROM `subjects` WHERE `sub_id` = '$sub_id'");  
 		  
-						function mysqli_result($result, $row, $field = 0) {
-    // Adjust the result pointer to that specific row
-    $result->data_seek($row);
-    // Fetch result array
-    $data = $result->fetch_array();
- 
-    return $data[$field];
-}
+						
 		if (!$result) 
 				{
 				die("Query to show fields from table failed");
@@ -47,16 +51,17 @@
 					else if ($numberOfRows > 0) 
 						{
 						$i=0;
-					$sub_id = mysqli_result($result,$i,"sub_id");	
-					$sub_code = mysqli_result($result,$i,"sub_code");
-					$sub_name = mysqli_result($result,$i,"sub_name");
-					$sub_lechrsprday = mysqli_result($result,$i,"sub_lechrsprday");
-					$sub_labhrsprday = mysqli_result($result,$i,"sub_labhrsprday");
-					$subcat_id = mysqli_result($result,$i,"subcat_id");
-					$cys = mysqli_result($result,$i,"cys");
-					$prereq = mysqli_result($result,$i,"prereq");
-					$sem = mysqli_result($result,$i,"sem_id");
-					$department = mysqli_result($result,$i,"dept_id");
+					$sub_id = MYSQL_RESULT($result,$i,"sub_id");	
+					$sub_code = MYSQL_RESULT($result,$i,"sub_code");
+					$sub_name = MYSQL_RESULT($result,$i,"sub_name");
+					$sub_lechrsprday = MYSQL_RESULT($result,$i,"sub_lechrsprday");
+					$sub_labhrsprday = MYSQL_RESULT($result,$i,"sub_labhrsprday");
+					$sub_instructor= MYSQL_RESULT($result,$i,"instructor");
+					$subcat_id = MYSQL_RESULT($result,$i,"subcat_id");
+					$cys = MYSQL_RESULT($result,$i,"cys");
+					$prereq = MYSQL_RESULT($result,$i,"prereq");
+					$sem = MYSQL_RESULT($result,$i,"sem_id");
+					$department = MYSQL_RESULT($result,$i,"dept_id");
 					
 		
 						
@@ -69,18 +74,24 @@
 				
 					$txtccode_a= $_POST['txtccode'];
 					$txtcdesc_a= $_POST['txtcdesc'];
+					$intIsNKN_a=$_POST['intIsNKN'];
 					$txtlechours_a= $_POST['txtlechours'];
-					$txtlabhours_a= $_POST['txtlabhours'];
-					$txtprereq_a= $_POST['txtprereq'];
-					$hidden_pcourseid_a= $_POST['pcourse'];
-					$hidden_psubcat_a= $_POST['psubcat'];
-					$hidden_psem_a = $_POST['psy'];
+					//$txtlabhours_a= $_POST['txtlabhours'];
+					$hidden_instructor_a=$_POST['pteacher'];
+					//$txtprereq_a= $_POST['txtprereq'];
+					//$hidden_pcourseid_a= $_POST['pcourse'];
+					//$hidden_psubcat_a= $_POST['psubcat'];
+					//$hidden_psem_a = $_POST['psy'];
 					$department_a = $_POST['pdept'];
 				
 		
-					mysql_query ("UPDATE subjects SET sub_code ='$txtccode_a' , sub_name = '$txtcdesc_a', sub_lechrsprday = '$txtlechours_a', sub_labhrsprday = '$txtlabhours_a' , subcat_id = '$hidden_psubcat_a', cys = '$hidden_pcourseid_a', prereq = '$txtprereq_a', sem_id = '$hidden_psem_a' , dept_id = '$department_a'  
+					/*mysqli_query ($conn,"UPDATE subjects SET sub_code ='$txtccode_a' , sub_name = '$txtcdesc_a', sub_lechrsprday = '$txtlechours_a', instructor='$hidden_instructor_a', subcat_id = '$hidden_psubcat_a', cys = '$hidden_pcourseid_a', prereq = '$txtprereq_a', sem_id = '$hidden_psem_a' , dept_id = '$department_a'  
 					 WHERE sub_id  = '$sub_id'")
-							 or die(mysql_error()); 
+							 or die(mysqli_error($result)); */
+							 
+mysqli_query ($conn,"UPDATE subjects SET sub_code ='$txtccode_a' , sub_name = '$txtcdesc_a',isNKN='$intIsNKN', sub_lechrsprday = '$txtlechours_a', instructor='$hidden_instructor_a',   dept_id = '$department_a'  
+					 WHERE sub_id  = '$sub_id'")
+							 or die(mysqli_error($result)); 
 						 header(
 						"Location: subjectlist-a.php");
 						}
@@ -141,7 +152,7 @@
 			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" />School Year</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" /> </span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
 
 			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
@@ -184,6 +195,12 @@
                 <td ><span class="style20">&nbsp;</span></td>
                 <td >&nbsp;</td>
               </tr>
+              <tr>
+                <td height="34" ><div align="right" class="style3">IsNKN?(O or not)</div></td>
+                <td><input name="intIsNKN" type="int" id= "intIsNKN" value="<?php echo $school; ?>"/></td>
+                <td><span class="style20"><?php echo $flagcredit; ?>&nbsp;</span></td>
+                <td>&nbsp;</td>
+              </tr>
               <tr >
                 <td height="35" ><div align="right" class="style3">Lecture Hours </div></td>
                 <td><label></label>
@@ -193,83 +210,24 @@
                 <td><span class="style20">&nbsp;</span></td>
                 <td>&nbsp;</td>
               </tr>
-              <tr >
-                <td height="34" ><div align="right" class="style3">Units </div></td>
-                <td ><input name="txtlabhours" type="text" id="txtlabhours" value="<?php echo $sub_labhrsprday; ?>"/></td>
-                <td><span class="style20">&nbsp;</span></td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td height="34" ><div align="right" class="style3">Prerequisite</div></td>
-                <td><input name="txtprereq" type="text" id= "txtprereq" value="<?php echo $prereq; ?>"/></td>
-                <td><span class="style20">&nbsp;</span></td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td height="34" ><div align="right" class="style3">Course Year and Section </div></td>
-                <td ><span class="style22">
-                  <label>
-                  <select name="pcourse"  id="pcourse" style="width: 267px" onchange="javascript: return optionList1_SelectedIndex()">
-                    <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysql_query("SELECT * FROM course ORDER BY course_yrSec ");			  	
-				do {  ?>
-                    <option value="<?php echo $row['course_id'];?>"><?php echo $row['course_yrSec'];?> </option>
-                    <?php } while ($row = mysql_fetch_assoc($result)); ?>
-                  </select>
-                  <!-- 
-		SELECT * FROM `course` WHERE 1`course_id``course_yrSec`
-			Setting up the correct combo box width alignment to table
-			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
-		-->
-                  <input type="hidden" id="hidden_pcourseid" name="hidden_pcourseid"  value="<?PHP echo trim($_POST['hidden_psubcatid']); ?>" />
-                  <input type="hidden" id="hidden_pcourse" name="hidden_pcourse" value="<?PHP echo trim($_POST['hidden_psubcat']); ?>"/>
-                  </label>
-                </span></td>
-                <td >&nbsp;</td>
-                <td >&nbsp;</td>
-              </tr>
               <tr  >
-                <td height="34" ><div align="right" class="style3">Subject Category </div></td>
+                <td height="34" ><div align="right" class="style3">Instructor </div></td>
                 <td><span class="style22">
                   <label>
-                  <select name="psubcat"  id="psubcat" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
+                  <select name="pteacher"  id="pteacher" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
                     <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysql_query("SELECT * FROM sub_category ORDER BY sub_cat ");			  	
+				$result = mysqli_query($conn,"SELECT * FROM profile ORDER BY teacher_id ");			  	
 				do {  ?>
-                    <option value="<?php echo $row['subcat_id'];?>"><?php echo $row['sub_cat'];?> </option>
-                    <?php } while ($row = mysql_fetch_assoc($result)); ?>
+                    <option value="<?php echo $row['teacher_id'];?>"><?php echo $row['teacher_name'];?> </option>
+                    <?php } while ($row = mysqli_fetch_assoc($result)); ?>
                   </select>
                   <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
-                  <input type="hidden" id="hidden_psubcatid" name="hidden_psubcatid"  value="<?PHP echo trim($_POST['hidden_psubcatid']); ?>" />
-                  <input type="hidden" id="hidden_psubcat" name="hidden_psubcat" value="<?PHP echo trim($_POST['hidden_psubcat']); ?>"/>
-                  </label>
-                </span></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr >
-                <td height="34"><div align="right" class="style3">Semester</div></td>
-                <td><span class="style22">
-                  <label>
-                  <select name="psy"  id="psy" style="width: 267px" onchange="javascript: return optionList7_SelectedIndex()">
-                    <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysql_query("SELECT * FROM sem ORDER BY semester ");			  	
-				do {  ?>
-                    <option value="<?php echo $row['sem_id'];?>"><?php echo $row['semester'];?> </option>
-                    <?php } while ($row = mysql_fetch_assoc($result)); ?>
-                  </select>
-                  <!-- 
-			Setting up the correct combo box width alignment to table
-			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
-		-->
-                  <input type="hidden" id="hidden_psemid" name="hidden_psemid"  value="<?PHP echo trim($_POST['hidden_psubcatid']); ?>" />
-                  <input type="hidden" id="hidden_psem" name="hidden_psem" value="<?PHP echo trim($_POST['hidden_psem']); ?>"/>
+                  <input type="hidden" id="hidden_ptid" name="hidden_pstid"  value="<?PHP echo trim($_POST['hidden_ptid']); ?>" />
+                  <input type="hidden" id="hidden_pt" name="hidden_pt" value="<?PHP echo trim($_POST['hidden_pt']); ?>"/>
                   </label>
                 </span></td>
                 <td>&nbsp;</td>
@@ -282,12 +240,12 @@
                     <select name="pdept"  id="pdept" style="width: 267px" onchange="javascript: return optionListd_SelectedIndex()">
                       <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysql_query("SELECT * FROM dept ORDER BY dept_id ");			  	
+				$result = mysqli_query($conn,"SELECT * FROM dept ORDER BY dept_id ");			  	
 				do {  ?>
                       <option value="<?php echo $row['dept_id'];?>"><?php echo $row['department'];?> </option>
-                      <?php } while ($row = mysql_fetch_assoc($result)); ?>
+                      <?php } while ($row = mysqli_fetch_assoc($result)); ?>
                     </select>
-                    <!--
+                    <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
@@ -312,12 +270,15 @@
 		</div>
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>
+		<p>&nbsp;</p>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_dev.php">Developer</a>| <a href="about_sched.php">Scheduling System</a>| <a href="contact.html">Contact Us</a>| <a href="www.chmsc.edu.ph">CHMSC </a></span></p>
+		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling 	                                System</a>
+                            </span>
+          </p>
 	  </div>
 	</div>
 	
-	<div id="footer">Four Dark Riders </div>	
+	<div id="footer">Four Dark Riders</div>		
 </div>
 </body>
 </html>
@@ -354,10 +315,10 @@
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
 
-			var selObj = document.getElementById('psubcat');
+			var selObj = document.getElementById('pteacher');
 			//var txtIndexObj = document.getElementById('txtIndex');
-			var hidden_psubcatid_ValueObj = document.getElementById('hidden_psubcatid');
-			var hidden_psubcat_TextObj = document.getElementById('hidden_psubcat');
+			var hidden_psubcatid_ValueObj = document.getElementById('hidden_ptid');
+			var hidden_psubcat_TextObj = document.getElementById('hidden_pt');
 			
 			var selIndex = selObj.selectedIndex;
 			//txtIndexObj.value = selIndex;

@@ -29,30 +29,43 @@ include("../includes/session.php");
 		if (trim($_POST['txtcdesc']) == ""){ $flagcdesc = 'Required Field.';}
 		if (trim($_POST['txtlechours']) == "")  { $flaglechours  = 'Required Field.';}
 		if (trim($_POST['txtlabhours']) == "") { $flaglabhours = 'Required Field.';} 		
-		if (trim($_POST['pcourse']) == "") { $flagcys = 'Required Field.';} 		
-		if (trim($_POST['psubcat']) == ""){ $flagsub_cat = 'Required Field.';}
+		if (trim($_POST['pcourse']) == "") { $flagcys = 'Required Field.';} 
+		if(trim($_POST['txtIsNKN'])=="") { $flagcredit='Required Field';}		
+		if (trim($_POST['pteacher']) == ""){ $flagItr = 'Required Field.';}
 		if (trim($_POST['psy']) == ""){ $flagsem = 'Required Field.';}
 		if (trim($_POST['pdept']) == ""){ $flagdept = 'Required Field.';}
 		
 		
 		
 
-if (($flagccode == "") &&  ($flagcdesc == "") && ($flaglechours == "") && ($flaglabhours == "") && ($flagcys == "") && ($flagsub_cat == "") && ($flagsem == "") && ($flagdept == ""))
+/*if (($flagccode == "") &&  ($flagcdesc == "") && ($flaglechours == "") && ($flaglabhours == "") && ($flagcys == "") && ($flagItr == "") && ($flagsem == "") && ($flagdept == ""))*/
+
+if (($flagccode == "") &&  ($flagcdesc == "") && ($flaglechours == "")   && ($flagItr == "") &&  ($flagdept == ""))
+
 {
 
 			
-		 	$txtccode= $_POST['txtccode'];
+		 	/*$txtccode= $_POST['txtccode'];
 			$txtcdesc= $_POST['txtcdesc'];
 			$txtlechours= $_POST['txtlechours'];
 			$txtlabhours= $_POST['txtlabhours'];
-			$txtprereq= $_POST['txtprereq'];
+			$txtIsNKN= $_POST['intIsNKN'];
 			$hidden_pcourseid= $_POST['pcourse'];
-			$hidden_psubcat= $_POST['psubcat'];
+			$hidden_pt= $_POST['pteacher'];
 			$hidden_psem = $_POST['psy'];
-			$dept = $_POST['pdept'];
+			$dept = $_POST['pdept'];*/
 
-			mysqli_query ($conn,"INSERT INTO subjects(sub_code, sub_name, sub_lechrsprday, sub_labhrsprday, subcat_id, cys, prereq, sem_id, dept_id)
-					VALUES('$txtccode', '$txtcdesc','$txtlechours','$txtlabhours','$hidden_psubcat','$hidden_pcourseid','$txtprereq','$hidden_psem','$dept')") or die(mysql_error()); 
+			
+			$txtccode= $_POST['txtccode'];
+			$txtcdesc= $_POST['txtcdesc'];
+			$txtlechours= $_POST['txtlechours'];
+			$txtIsNKN= $_POST['intIsNKN'];
+			$hidden_pt= $_POST['pteacher'];
+			$dept = $_POST['pdept'];
+			
+
+			mysqli_query ($conn,"INSERT INTO subjects(sub_code, sub_name, sub_lechrsprday, sub_labhrsprday, instructor, cys, isNKN, sem_id, dept_id)
+					VALUES('$txtccode', '$txtcdesc','$txtlechours','$txtlabhours','$hidden_pt','$hidden_pcourseid','$intIsNKN','$hidden_psem','$dept')") or die(mysql_error()); 
 					echo "Your file has been saved in the database..";
 								 header(
 			 	"Location: subjectlist-a.php");
@@ -117,7 +130,7 @@ if (($flagccode == "") &&  ($flagcdesc == "") && ($flaglechours == "") && ($flag
 			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-		<!-- Add School Year -->
+		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" /> </span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
 
 			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
@@ -169,111 +182,63 @@ if (($flagccode == "") &&  ($flagcdesc == "") && ($flaglechours == "") && ($flag
                 <td><span class="style20"><?php echo $flaglechours; ?>&nbsp;</span></td>
                 <td>&nbsp;</td>
               </tr>
-              <tr >
-                <td height="34" ><div align="right" class="style3">Laboratory Hours </div></td>
-                <td ><input name="txtlabhours" type="text" id="txtlabhours" value="<?php echo $bach_deg; ?>"/></td>
-                <td><span class="style20"><?php echo $flaglabhours; ?>&nbsp;</span></td>
-                <td>&nbsp;</td>
-              </tr>
               <tr>
-                <td height="34" ><div align="right" class="style3">Prerequisite</div></td>
-                <td><input name="txtprereq" type="text" id= "txtprereq" value="<?php echo $school; ?>"/></td>
+                <td height="34" ><div align="right" class="style3">IsNKN?(O or not)</div></td>
+                <td><input name="intIsNKN" type="int" id= "intIsNKN" value="<?php echo $school; ?>"/></td>
                 <td><span class="style20"><?php echo $flagcredit; ?>&nbsp;</span></td>
                 <td>&nbsp;</td>
               </tr>
-              <tr>
-                <td height="34" ><div align="right" class="style3">Course Year and Section </div></td>
-                <td ><span class="style22">
-                  <label>
-                  <select name="pcourse"  id="pcourse" style="width: 267px" onchange="javascript: return optionList1_SelectedIndex()">
-                    <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM course ORDER BY course_yrSec ");			  	
-				do {  ?>
-                    <option value="<?php echo $row['course_id'];?>"><?php echo $row['course_yrSec'];?> </option>
-                    <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-                  </select>
-                  <!-- 
-		SELECT * FROM `course` WHERE 1`course_id``course_yrSec`
-			Setting up the correct combo box width alignment to table
-			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
-		-->
-                  <input type="hidden" id="hidden_pcourseid" name="hidden_pcourseid"  value="<?PHP echo trim($_POST['hidden_psubcatid']); ?>" />
-                  <input type="hidden" id="hidden_pcourse" name="hidden_pcourse" value="<?PHP echo trim($_POST['hidden_psubcat']); ?>"/>
-                  </label>
-                </span></td>
-                <td ><span class="style21"><span class="style20"><?php echo $flagcys; ?></span></span></td>
-                <td >&nbsp;</td>
-              </tr>
+     
+ <!--#########-->
+   <!--#########-->
+   
               <tr  >
-                <td height="34" ><div align="right" class="style3">Subject Category </div></td>
+                <td height="34" ><div align="right" class="style3">Instructor</div></td>
                 <td><span class="style22">
                   <label>
-                  <select name="psubcat"  id="psubcat" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
-                    <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
+                  <select name="pteacher"  id="pteacher" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
+  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM sub_category ORDER BY sub_cat ");			  	
+				$result = mysqli_query($conn,"SELECT * FROM profile ORDER BY teacher_name ");			  	
 				do {  ?>
-                    <option value="<?php echo $row['subcat_id'];?>"><?php echo $row['sub_cat'];?> </option>
-                    <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-                  </select>
+  <option value="<?php echo $row['teacher_id'];?>"><?php echo $row['teacher_name'];?> </option>
+  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
+</select>
                   <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
-                  <input type="hidden" id="hidden_psubcatid" name="hidden_psubcatid"  value="<?PHP echo trim($_POST['hidden_psubcatid']); ?>" />
-                  <input type="hidden" id="hidden_psubcat" name="hidden_psubcat" value="<?PHP echo trim($_POST['hidden_psubcat']); ?>"/>
-                  </label>
-                </span></td>
-                <td><span class="style21"><span class="style20"><?php echo $flagsub_cat; ?></span></span></td>
+                  <input type="hidden" id="hidden_ptid" name="hidden_ptid"  value="<?PHP echo trim($_POST['hidden_ptid']); ?>" />
+                <input type="hidden" id="hidden_pt" name="hidden_pt" value="<?PHP echo trim($_POST['hidden_pt']); ?>"/>
+              </label>
+              </span></td>
+                <td><span class="style21"><span class="style20"><?php echo $flagItr; ?></span></span></td>
                 <td>&nbsp;</td>
               </tr>
-              <tr >
-                <td height="34"><div align="right" class="style3">Semester</div></td>
-                <td><span class="style22">
-                  <label>
-                  <select name="psy"  id="psy" style="width: 267px" onchange="javascript: return optionList7_SelectedIndex()">
-                    <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM sem ORDER BY semester ");			  	
-				do {  ?>
-                    <option value="<?php echo $row['sem_id'];?>"><?php echo $row['semester'];?> </option>
-                    <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-                  </select>
-                  <!-- 
-			Setting up the correct combo box width alignment to table
-			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
-		-->
-                  <input type="hidden" id="hidden_psemid" name="hidden_psemid"  value="<?PHP echo trim($_POST['hidden_psubcatid']); ?>" />
-                  <input type="hidden" id="hidden_psem" name="hidden_psem" value="<?PHP echo trim($_POST['hidden_psem']); ?>"/>
-                  </label>
-                </span></td>
-                <td><span class="style21"><span class="style20"><?php echo $flagsem; ?></span></span></td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr >
-                 <tr>
-                    <td height="35"><div align="right" class="style3">Department </div></td>
-                    <td><label></label>
-                        <label>
-                        <select name="pdept"  id="pdept" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
-                          <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
+              
+    <!--#########-->
+    <tr>
+               <td height="35"><div align="right" class="style3">Department </div></td>
+               <td><label></label>
+                   <label>
+                     <select name="pdept"  id="pdept" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
+                       <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
 				$result = mysqli_query($conn,"SELECT * FROM dept ORDER BY dept_id ");			  	
 				do {  ?>
-                          <option value="<?php echo $row['dept_id'];?>"><?php echo $row['department'];?> </option>
-                          <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-                        </select>
-                        <!-- 
+                       <option value="<?php echo $row['dept_id'];?>"><?php echo $row['department'];?> </option>
+                       <?php } while ($row = mysqli_fetch_assoc($result)); ?>
+                     </select>
+                     <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
-                        <input type="hidden" id="hidden_dept_id" name="hidden_dept_id"  value="<?PHP echo trim($_POST['hidden_dept_id']); ?>" />
-                        <input type="hidden" id="hidden_dept" name="hidden_dept" value="<?PHP echo trim($_POST['hidden_dept']); ?>"/>
-                      </label></td>
-                    <td  ><span class="style20">&nbsp;<?php echo $flagdept; ?>&nbsp;</span></td>
-                    <td >&nbsp;</td>
-                  </tr>
+                     <input type="hidden" id="hidden_dept_id" name="hidden_dept_id"  value="<?PHP echo trim($_POST['hidden_dept_id']); ?>" />
+                     <input type="hidden" id="hidden_dept" name="hidden_dept" value="<?PHP echo trim($_POST['hidden_dept']); ?>"/>
+                 </label></td>
+               <td  ><span class="style20">&nbsp;<?php echo $flagdept; ?>&nbsp;</span></td>
+               <td >&nbsp;</td>
+              </tr>
                 
               <tr>
                 <td height="18" colspan="4">&nbsp;</td>
@@ -338,10 +303,10 @@ if (($flagccode == "") &&  ($flagcdesc == "") && ($flaglechours == "") && ($flag
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
 
-			var selObj = document.getElementById('psubcat');
+			var selObj = document.getElementById('pteacher');
 			//var txtIndexObj = document.getElementById('txtIndex');
-			var hidden_psubcatid_ValueObj = document.getElementById('hidden_psubcatid');
-			var hidden_psubcat_TextObj = document.getElementById('hidden_psubcat');
+			var hidden_psubcatid_ValueObj = document.getElementById('hidden_ptid');
+			var hidden_psubcat_TextObj = document.getElementById('hidden_pt');
 			
 			var selIndex = selObj.selectedIndex;
 			//txtIndexObj.value = selIndex;
@@ -419,7 +384,7 @@ if (($flagccode == "") &&  ($flagcdesc == "") && ($flaglechours == "") && ($flag
 <script language="javascript" >
 	var form = document.forms[0];
 	//purpose?: to retrieve what users last input on the field..
-	form.psubcat.value = ("<?PHP echo $_POST['hidden_psubcat']; ?>");
+	form.pteacher.value = ("<?PHP echo $_POST['hidden_pt']; ?>");
 	form.psy.value = ("<?PHP echo $_POST['hidden_psem']; ?>");
 	form.pcourse.value = ("<?PHP echo $_POST['hidden_pcourse']; ?>");
 	form.pdept.value = ("<?PHP echo $_POST['hidden_dept']; ?>");
