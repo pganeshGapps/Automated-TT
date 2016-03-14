@@ -142,6 +142,7 @@ if (isset($_POST['cmdSubmit']))
 					});
 				});
 			  </script>
+			  
 			  <form action="<?php echo $_SERVER[PHP_SELF] ?>" name="form1" method="post" >
 			  	<input type="submit" name="cmdSubmit" value="View current Timetable" />
 			  </form>
