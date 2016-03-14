@@ -101,9 +101,6 @@
               <tr>
                 <?php
 
-			$pT =$_REQUEST['pT'];
-			$pSy =$_REQUEST['pSy'];
-			$psem=$_REQUEST['psem'];
 
 		If ($numberOfRows == 0) 
 			{
