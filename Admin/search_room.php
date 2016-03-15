@@ -126,7 +126,7 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
               <td width="76" height="34" ><div align="right" class="style3">Room</div></td>
               <td width="342"  ><span class="style22">
                 <label>
-<select name="pcourse"  id="pcourse" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
+<select name="pRoom"  id="pRoom" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
 				$result = mysqli_query($conn,"SELECT * FROM room ORDER BY room_name ");			  	
