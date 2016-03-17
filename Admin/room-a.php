@@ -104,11 +104,7 @@ if (($flagroom == "") &&  ($flagcap == "") &&  ($flagdesc == ""))
 			<li class=" cssMenui"><a class="  cssMenui" href="deptlist-a.php"><img src="../images/folder.ico" />View</a></li>
 		</ul>
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-<<<<<<< HEAD
-		<!-- Add School Year -->
-=======
 		<li class=" cssMenui"><a class="  cssMenui" href="year-a.php"><span><img src="../images/sy .jpg" /> </span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
->>>>>>> refs/remotes/pganeshGapps/master
 		<ul class=" cssMenum">
 
 			<li class=" cssMenui"><a class="  cssMenui" href="year-a.php "><img src="../images/folder-new.ico" />Add</a></li>
@@ -149,15 +145,22 @@ if (($flagroom == "") &&  ($flagcap == "") &&  ($flagdesc == ""))
               </tr>
               
               <tr >
-                <td width="175" height="41"  ><div align="right" class="style3">isNKN?(1 or 0)</div></td>
-                <td width="170" ><input type="text" name="txtIsNKN" id="txtIsNKN" value="<?php echo $room_isNKN; ?>" /></td>
+                <td width="175" height="41"  ><div align="right" class="style3">isNKN?</div></td>
+     
+                 <td width="170" >
+                <select name="txtIsNKN" id="txtIsNKN">
+    			<option value="1">Yes</option>
+   	   		    <option value="0">No</option>
+                </select>
+            	</td>    
+                
                 <td width="110"><span class="style20"><?php echo $flagroom; ?>&nbsp;</span></td>
                 <td width="1">&nbsp;</td>
               </tr>
               
               <tr >
-                <td width="175" height="41"  ><div align="right" class="style3">Size</div></td>
-                <td width="170" ><input type="text" name="txtSize" id="txtSize" value="<?php echo $room_size; ?>" /></td>
+                <td width="175" height="41"  ><div align="right" class="style3">Capacity</div></td>
+                <td width="170" ><input type="int" name="txtSize" id="txtSize" value="<?php echo $room_size; ?>" /></td>
                 <td width="110"><span class="style20"><?php echo $flagroom; ?>&nbsp;</span></td>
                 <td width="1">&nbsp;</td>
               </tr>
