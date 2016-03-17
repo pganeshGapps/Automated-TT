@@ -1,25 +1,27 @@
 <?php
+
+error_reporting( error_reporting() & ~E_NOTICE );
+
 //connection
 //include("../includes/session.php");
 //require ("../includes/DBConnection.php");
 
-$conn = mysqli_connect('localhost', 'root', 'root','schedulingv2');
+$conn = mysqli_connect('localhost', 'root', 'root','last1');
 	 if (!$conn)
     {
 	 die('Could not connect: ' . mysqli_error($conn));
 	}
 	//echo 'Connected successfully' . 'iancuello';
-	mysqli_select_db( $conn,"schedulingv2");
+	mysqli_select_db( $conn,"last1");
 	
 	
 
 //Retrieving function_exists
 function mysql_result($result, $row, $field = 0) {
  			   // Adjust the result pointer to that specific row
-    			$result->data_seek($row);
+    			@$result->data_seek($row);
  			   // Fetch result array
  			   $data = $result->fetch_array();
- 
  			   return $data[$field];
 				}	
 
@@ -228,27 +230,34 @@ else if ($numberOfRows > 0)
 	while ($i<$numberOfRows)
 		{		
 			
-			//prof_id, sub_id,duration,groups,lab/isNKN(boolian)
+			//prof_id, sub_id,duration,groups,lab/isNKN(Y/N)
 			$sub_id = MYSQL_RESULT($result,$i,"sub_id");	
 			$sub_code = MYSQL_RESULT($result,$i,"sub_code");
 			$sub_name = MYSQL_RESULT($result,$i,"sub_name");
-			$sub_lechrsprday = MYSQL_RESULT($result,$i,"sub_lechrsprday");
+			$sub_lechrsprWeek = MYSQL_RESULT($result,$i,"sub_lechrsprday");
 			  
-			    $sub_instructor_id= MYSQL_RESULT($result,$i,"instructor");
-				$result2=mysqli_query($conn,"SELECT teacher_name from profile WHERE teacher_id = '$sub_instructor_id' ");
-				$row2 = mysqli_fetch_array($result2);
-			$sub_instr_name= $row2['teacher_name'];
-			$group_id=substr($sub_code,1,2);
+	    $sub_instructor_id= MYSQL_RESULT($result,$i,"instructor"); 
+		$result2= mysqli_query($conn,"SELECT teacher_name FROM profile WHERE teacher_id = $sub_instructor_id ");		
+			//$data = $result->fetch_array();
+ 			//$sub_instr_name= $data['teacher_name'];
+		
+		$sub_instr_name= MYSQL_RESULT($result2,1,'teacher_name');   
+			   
+			    $temp=substr($sub_code,2,1);             //temp=year
+			    $dept_id=MYSQL_RESULT($result,$i,"dept_id");
+			$group_id=$dept_id.$temp;   //group_id=dept.year	
 			$isNKN = MYSQL_RESULT($result,$i,"isNKN");
 			
-			
-			
+			$sub_lechrsprDay=1;                  
+		while($sub_lechrsprWeek >0){			//writing a class 'L'=lechrsprweek times in class.cfg file
 			fwrite($classFile,$sub_instr_name."\n" );
 			fwrite($classFile, $sub_id."\n" );
-			fwrite($classFile,$sub_lechrsprday."\n" );
+			fwrite($classFile,$sub_lechrsprDay."\n" );
 			fwrite($classFile,$group_id."\n" );
 			fwrite($classFile,$isNKN."\n" );
 			
+			$sub_lechrsprWeek-=1;
+		}
 		$i++;		
 		}
 	}
