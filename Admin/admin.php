@@ -120,6 +120,9 @@ if (isset($_POST['cmdSubmit']))
 					$("button").click(function()
 					{
 						<?php
+/*###########INPUT FILES WRITING
+						
+############  END WRITING*/
 						exec("main.exe",$output);
 						mysqli_query($conn,"DELETE FROM sched ");
 						$myfile = fopen("tt.cfg", "r") or die("Unable to open file!");
