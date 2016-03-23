@@ -11,4 +11,4 @@ Instructions:
 6. Import the sql file which is in the sql directory.
 7. Congratulations.. your good to go.
 
-Thanks you ... ^_^
+Thank you ... ^_^
