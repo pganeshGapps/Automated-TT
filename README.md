@@ -9,6 +9,6 @@ Instructions:
 4. Open your browser and type 'localhost/' or '127.0.0.1/' , then from there go to phpmyadmin.
 5. Create a database named:'scheduling'  in phpmyadmin.
 6. Import the sql file which is in the sql directory.
-7. Congratulations.. your good to go.
+7. Congratulations.. now,you are good to go.
 
 Thank you ... ^_^
