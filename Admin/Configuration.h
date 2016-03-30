@@ -34,6 +34,7 @@ private:
     
     // Parsed student groups
     map<int, StudentsGroup*> _studentGroups;
+    map<string, StudentsGroup*> _studentGroups2;
     
     // Parsed courses
     map<int, Course*> _courses;

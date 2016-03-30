@@ -98,7 +98,7 @@ void Configuration::ParseFile(char* fileName)
         list<StudentsGroup*> s;
         ss>>st;
         while(ss){
-            s.push_back(_studentGroups[atoi(st.c_str())]);
+            s.push_back(_studentGroups2[st]);
             ss>>st;
         }
         CourseClass* cc = new CourseClass(_professors[atoi(pr.c_str())],_courses[atoi(co.c_str())],s,lb=="1"?true:false,atoi(du.c_str()));
