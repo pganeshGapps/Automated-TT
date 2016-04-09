@@ -81,6 +81,7 @@ void Configuration::ParseFile(char* fileName)
         getline(input,number);
         StudentsGroup* g = new StudentsGroup(atoi(id.c_str()),name,atoi(number.c_str()));
         _studentGroups.insert( pair<int, StudentsGroup*>( g->GetId(), g ) );
+        _studentGroups2.insert( pair<string, StudentsGroup*>( g->GetName(), g ) );
     }
     input.close();
 
