@@ -59,7 +59,7 @@ $error ='You did not fill in a required field.';
 if (!get_magic_quotes_gpc()) {
 $_POST['email'] = addslashes($_POST['email']);
 }
-$check = mysqli_query($conn,"SELECT * FROM user WHERE username = '".$_POST['username']."'")or die(mysql_error());
+$check = mysqli_query($conn,"SELECT * FROM user WHERE username = '".$_POST['username']."'")or die(mysqli_error($conn));
 
 //Gives error if user dosen't exist
 $check2 = mysqli_num_rows($check);

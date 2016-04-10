@@ -25,17 +25,11 @@
    if (isset($_POST['cmdSubmit'])) 
   	{ 		
 		
-		if (trim($_POST['pcourse']) == ""){ $flagcourse = 'Required Field.';}	
-		if (trim($_POST['psy']) == ""){ $flagsy= 'Required Field.';}
-		if (trim($_POST['psem']) == ""){ $flagsy= 'Required Field.';}
+		if (trim($_POST['pRoom']) == ""){ $flagcourse = 'Required Field.';}
 
-//if (($flagcourse == "") && ($flagsy == ""))
-//{
 $hidden_pcourse= $_POST['hidden_pcourse'];
 			 header(
-			 		"Location: search_r_result.php?pRoom=". $_POST['pcourse'] 
-					."&pSy=". $_POST['psy'] 
-					."&psem=". $_POST['psem'] 					
+			 		"Location: search_r_result.php?pR=". $_POST['pRoom']				
 		 		   );				   				   
 			}
 ?>
@@ -132,7 +126,7 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
               <td width="76" height="34" ><div align="right" class="style3">Room</div></td>
               <td width="342"  ><span class="style22">
                 <label>
-<select name="pcourse"  id="pcourse" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
+<select name="pRoom"  id="pRoom" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
 				$result = mysqli_query($conn,"SELECT * FROM room ORDER BY room_name ");			  	
@@ -140,50 +134,7 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
   <option value="<?php echo $row['room_id'];?>"><?php echo $row['room_name'];?> </option>
   <?php } while ($row = mysqli_fetch_assoc($result)); ?>
 </select>
-<!-- 
-			Setting up the correct combo box width alignment to table
-			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
-		-->
-                <input type="hidden" id="hidden_pcourseid" name="hidden_pcourseid"  value="<?PHP echo trim($_POST['hidden_pcourseid']); ?>" />
-                <input type="hidden" id="hidden_pcourse" name="hidden_pcourse" value="<?PHP echo trim($_POST['hidden_pcourse']); ?>"/>
-              </label>
-              </span></td>
-              <td width="16" ><span class="style21"><span class="style20"><?php echo $flagcourse; ?></span></span></td>
-            </tr>
-            <tr   >
-              <td height="34"><div align="right" class="style3">School Year </div></td>
-              <td  ><span class="style22">
-                <label>
-                <select name="psy"  id="psy" style="width: 267px" onchange="javascript: return optionList7_SelectedIndex()">
-                  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM school_yr ORDER BY school_year ");			  	
-				do {  ?>
-                  <option value="<?php echo $row['year_id'];?>"><?php echo $row['school_year'];?> </option>
-                  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-                </select>
-                <!-- 
-			Setting up the correct combo box width alignment to table
-			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
-		-->
-                <input type="hidden" id="hidden_psyid" name="hidden_psyid"  value="<?PHP echo trim($_POST['hidden_psyid']); ?>" />
-                <input type="hidden" id="hidden_psy" name="hidden_psy" value="<?PHP echo trim($_POST['hidden_psy']); ?>"/>
-                </label>
-              </span></td>
-              <td><span class="style21"><span class="style20"><?php echo $flagsy; ?></span></span></td>
-            </tr> 
-            <tr   >
-              <td height="34"><div align="right" class="style3">Semester</div></td>
-              <td  ><span class="style22">
-                <label>
-                <select name="psem"  id="psem" style="width: 267px" onchange="javascript: return optionList1_SelectedIndex()">
-                  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM sem ORDER BY semester ");			  	
-				do {  ?>
-                  <option value="<?php echo $row['sem_id'];?>"><?php echo $row['semester'];?> </option>
-                  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-                </select>
+
                 <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm

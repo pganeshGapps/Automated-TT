@@ -183,8 +183,13 @@ if (($flagccode == "") &&  ($flagcdesc == "") && ($flaglechours == "")   && ($fl
                 <td>&nbsp;</td>
               </tr>
               <tr>
-                <td height="34" ><div align="right" class="style3">IsNKN?(O or not)</div></td>
-                <td><input name="intIsNKN" type="int" id= "intIsNKN" value="<?php echo $school; ?>"/></td>
+                <td height="34" ><div align="right" class="style3">IsNKN?</div></td>
+                <!--<td><input name="intIsNKN" type="int" id= "intIsNKN" value="<?php //echo $school; ?>"/></td> -->
+                <td>
+                <select name="intIsNKN" id="intIsNKN">
+    			<option value="1">Yes</option>
+   	   		    <option value="0">No</option>
+                </select>
                 <td><span class="style20"><?php echo $flagcredit; ?>&nbsp;</span></td>
                 <td>&nbsp;</td>
               </tr>
