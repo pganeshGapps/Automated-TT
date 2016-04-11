@@ -1,12 +1,10 @@
-body {
-	color:#003399;
+﻿body {
+	color: #003399;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	margin: 10px 10px;
 	padding: 0px;
-	background-image: url('images/clock.jpg');
-	background-attachment: fixed;
-
+	background-image: url('../images/clock.jpg');
 }
 .clear{clear:both;}
 * {
