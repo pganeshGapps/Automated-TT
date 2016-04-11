@@ -164,11 +164,28 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
  			   $data = $result->fetch_array();
  			   return $data[$field];
 				}	
-		  	
-				do {  ?>
-                  <option value="<?php echo  $row['group_id'];?>"><?php echo  $row['group_id'];?> </option>
+		  		
+		  		$myarray=array();
+				$i=0;
+				##############
+				function searchForId($thisgroupid, $array) {
+					foreach ($array as $key => $val) {
+       								 if ($val['id'] === $thisgroupid) { return $key; }
+   									}
+   					 return (-1);
+				 }
+				###############
+				 while ($row = mysqli_fetch_assoc($result)) {  
+				$group_id= $row['group_id']
+				$key= searchForId($group_id,$myarray);
+				if($key == (-1) || $i == 0 ){
+					$myarray[] = array("id" => $group_id);
+					$i++;
+					?>
+                  			<option value="<?php echo  $row['group_id'];?>"><?php echo  $row['group_id'];?> </option>
                   
-                  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
+                  		<?php 	}else{continue;}
+                  		} ?>
                 </select>
                 <!-- 
 			Setting up the correct combo box width alignment to table
