@@ -103,7 +103,7 @@ include("../includes/session.php");
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>-->
+	<!-- -->
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
@@ -118,76 +118,28 @@ include("../includes/session.php");
 
   </div>
 	<div id="content">
-	
-	  <div id="left">
-		
 	    <div align="center">
-		    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-              <br />
-              <div id="Layer2">
-                <p align="left"><strong>Ganesh Patil</strong></p>
-				<p align="left">B14CS017</p>
-				 <p align="left">Email:patil.1@iitj.ac.in </p>
-				 <p align="left"><strong>Varun Kumar</strong></p>
-				<p align="left">B14CS039</p>
-				 <p align="left">Email:kumar.2@iitj.ac.in </p>
-              </div>
-			  <div id="Layer3">
-			    <p align="left"><strong>Ayush Agrawal</strong></p>
-  <p align="left">B14CS010</p>
-  <p align="left">Email: agrawal.1@iitj.ac.in </p>
-  <p align="left"><strong>Akshay Chaudhari</strong></p>
-  <p align="left">B14CS013</p>
-  <p align="left">Email: gajanan.1@iitj.ac.in </p>
-</div>
-<div id="Layer4">
-  <p align="right">&nbsp;</p>
-  </div>
-  <div id="Layer5">
-  <!--<p align="left"><strong><!--&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp May Ann Corugda--></strong></p>
-  <!--<p align="left"><!--&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp BSIM 4B--></p>
-  <!--<p align="left"><!--&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Email: corugda_mayann@yahoo.com --></p>
-  <br>
-</div>
-		      <p><strong>About the Developers </strong><br />
-		      </p>
-          </form>
+	    	<br />
+	    	<p><strong>About the Developers </strong><br /></p>
             <p>We are the Students of IIT Jodhpur who developed the Online Scheduling System.</p>
+            <br />
+            <p align="center"><strong>Ayush Agrawal</strong></p>
+            <p align="center">B14CS010</p>
+            <p align="center">Email: agrawal.1@iitj.ac.in </p>
+            <br />
+            <p align="center"><strong>Akshay Chaudhari</strong></p>
+            <p align="center">B14CS013</p>
+            <p align="center">Email: gajanan.1@iitj.ac.in </p>
+            <br />
+            <p align="center"><strong>Ganesh Patil</strong></p>
+            <p align="center">B14CS017</p>
+            <p align="center">Email:patil.1@iitj.ac.in </p>
+            <br />
+            <p align="center"><strong>Varun Kumar</strong></p>
+            <p align="center">B14CS039</p>
+            <p align="center">Email:kumar.2@iitj.ac.in </p>
+            <br />
         </div>
-	   
-	  </div>
-		<div id="program"></div>
-		<div id="right">
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p align="right">&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp; </p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-		</div>
 		<div id="footerline">
 		 <!-- <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_dev.php">Developer</a>| <a href="about_sched.php">Scheduling System</a>| <a href="contact.html">Contact Us</a>| <a href="www.chmsc.edu.ph">CHMSC </a></span></p>-->	  </div>
 	</div>
