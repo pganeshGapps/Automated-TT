@@ -21,14 +21,12 @@
 <?php
    include("../includes/session.php");
   require ("../includes/dbconnection.php");
-
    if (isset($_POST['cmdSubmit'])) 
   	{ 		
 		
 		if ($_POST['psem']){header(
 			 		"Location: search_g_result.php?pG=". $_POST['psem'] 					
 		 		   );}
-
 //if (($flagcourse == "") && ($flagsy == ""))
 //{
 $hidden_pcourse= $_POST['hidden_pcourse'];
@@ -151,7 +149,6 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
 				//$result = mysqli_query($conn,"SELECT * FROM sem ORDER BY semester ");
 				$result = mysqli_query($conn,"SELECT group_id,dept_id FROM subjects ORDER BY dept_id ");
 				
-
 				if (!$result) 
 					{
     					die("Query to show fields from table failed");
@@ -166,7 +163,7 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
 				}	
 		  		
 		  		$myarray=array();
-				$i=0;
+				$i=0;$key=0;
 				##############
 				function searchForId($thisgroupid, $array) {
 					foreach ($array as $key => $val) {
@@ -176,7 +173,7 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
 				 }
 				###############
 				 while ($row = mysqli_fetch_assoc($result)) {  
-				$group_id= $row['group_id']
+				$group_id= $row['group_id'];
 				$key= searchForId($group_id,$myarray);
 				if($key == (-1) || $i == 0 ){
 					$myarray[] = array("id" => $group_id);
@@ -252,7 +249,6 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
 			* text - For an option, what's in between the option tags
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
-
 			var selObj = document.getElementById('pcourse');
 			//var txtIndexObj = document.getElementById('txtIndex');
 			var hidden_pcourseid_ValueObj = document.getElementById('hidden_pcourseid');
@@ -282,7 +278,6 @@ function optionList1_SelectedIndex()
 			* text - For an option, what's in between the option tags
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
-
 			var selObj = document.getElementById('psem');
 			//var txtIndexObj = document.getElementById('txtIndex');
 			var hidden_psemid_ValueObj = document.getElementById('hidden_psemid');
@@ -318,7 +313,6 @@ function optionList1_SelectedIndex()
 			* text - For an option, what's in between the option tags
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
-
 			var selObj = document.getElementById('psy');
 			//var txtIndexObj = document.getElementById('txtIndex');
 			var hidden_psyid_ValueObj = document.getElementById('hidden_psyid');
@@ -338,7 +332,6 @@ function optionList1_SelectedIndex()
 		
 		
 </script>	
-
 <script language="javascript" >
 	var form = document.forms[0];
 	//purpose?: to retrieve what users last input on the field..
