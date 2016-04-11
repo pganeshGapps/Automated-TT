@@ -193,7 +193,7 @@ if (($flaguser == "") && ($flagpass == "") && ($flagdept == ""))
 		<div id="program"></div>
 	<div id="right"></div>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling 	                                System</a>
+		 <!-- <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling 	                                System</a>-->
                             </span>
           </p>
 	  </div>
