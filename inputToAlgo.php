@@ -1,36 +1,22 @@
 <?php
+require ("../includes/dbconnection.php");
+error_reporting( error_reporting() & ~E_NOTICE );
 //connection
 //include("../includes/session.php");
 //require ("../includes/DBConnection.php");
-
-$conn = mysqli_connect('localhost', 'root', 'root','schedulingv2');
-	 if (!$conn)
-    {
-	 die('Could not connect: ' . mysqli_error($conn));
-	}
-	//echo 'Connected successfully' . 'iancuello';
-	mysqli_select_db( $conn,"schedulingv2");
 	
-	
-
 //Retrieving function_exists
 function mysql_result($result, $row, $field = 0) {
  			   // Adjust the result pointer to that specific row
-    			$result->data_seek($row);
+    			@$result->data_seek($row);
  			   // Fetch result array
  			   $data = $result->fetch_array();
- 
  			   return $data[$field];
 				}	
-
-
-
 ######   PROFESSOR   #######
-
 $proFile=fopen("prof.cfg","w");
 // sending query-- select teacher_id and teacher_name from profile table
-$result = mysqli_query($conn,"SELECT teacher_id, teacher_name FROM `profile`");
-
+$result = mysqli_query($conn,"SELECT teacher_id, teacher_name FROM profile");
 if (!$result) 
 	{
     die("Query to show fields from table failed");
@@ -51,8 +37,10 @@ else if ($numberOfRows > 0)
 				fwrite($proFile, $txt);
 			
 			$prof_name = MYSQL_RESULT($result,$i,"teacher_name");
-				$txt = $prof_name."\n";
+				$txt = $prof_name;
 				fwrite($proFile, $txt);
+				if($i<$numberOfRows-1)
+				fwrite($proFile,"\n");
 			
 			//echo $profile_no ."  - ".$faculty_name."<br/>" ;			
 		$i++;		
@@ -60,13 +48,10 @@ else if ($numberOfRows > 0)
 	}
 	
 fclose($proFile);
-
 ###### 		COURSE	  #######
-
 $courseFile=fopen("course.cfg","w");
 // sending query-- select subject_id and subject_name from subjects table
 $result = mysqli_query($conn,"SELECT sub_name,sub_id FROM subjects ");
-
 if (!$result) 
 	{
     die("Query to show fields from table failed");
@@ -87,22 +72,20 @@ else if ($numberOfRows > 0)
 				fwrite($courseFile, $txt);
 			
 			$subject_name = MYSQL_RESULT($result,$i,"sub_name");
-				$txt = $subject_name."\n";
+				$txt = $subject_name;
 				fwrite($courseFile, $txt);
+				if($i<$numberOfRows-1)
+				fwrite($courseFile,"\n");
 			
 		$i++;		
 		}
 	}
 	
 fclose($courseFile);
-
-
 ######   ROOM   #######
-
 $roomFile=fopen("room.cfg","w");
 // sending query-- select room_name,room_isNKN and room_size from room table
 $result = mysqli_query($conn,"SELECT room_name,room_isNKN,room_size FROM room ");
-
 if (!$result) 
 	{
     die("Query to show fields from table failed");
@@ -127,21 +110,21 @@ else if ($numberOfRows > 0)
 				fwrite($roomFile, $txt);
 			
 			$room_size = MYSQL_RESULT($result,$i,"room_size");
-				$txt = $room_size."\n";
+				$txt = $room_size;
 				fwrite($roomFile, $txt);
+				if($i<$numberOfRows-1)
+				fwrite($roomFile,"\n");
 			
 		$i++;		
 		}
 	}
 	
 fclose($roomFile);
-
 ######   GROUP  #######
-
 $groupFile=fopen("group.cfg","w");
 // sending query-- select group_id and group_name ,group_size from users table
-$result = mysqli_query($conn,"SELECT dept_id,year FROM user ");
-
+#$result = mysqli_query($conn,"SELECT dept_id,year FROM user ");
+$result = mysqli_query($conn,"SELECT * FROM subjects");
 if (!$result) 
 	{
     die("Query to show fields from table failed");
@@ -167,13 +150,15 @@ function searchForId($thisgroupid, $array) {
    return (-1);
 }
 ###############
-
+$group_count = 0;
 	while ($i<$numberOfRows)
 		{	
 			$dept_id = MYSQL_RESULT($result,$i,"dept_id");
-			$year = MYSQL_RESULT($result,$i,"year");
+			$sub_code=MYSQL_RESULT($result,$i,"sub_code");
+			$year = substr($sub_code,2,1);             //temp=year
+			
 				$group_id=$dept_id.$year;
-				$txt1= $group_id."\n";//for group_id
+				//$txt1= $group_id."\n";//for group_id
 			
 				$group_name=$group_id;
 				$txt2 = $group_name."\n";//for group_name
@@ -183,10 +168,13 @@ function searchForId($thisgroupid, $array) {
 				
 			//Adding new group only if it doesn't added before($key==false) and its not admin or Teacher(year!=0)
 			if($key == (-1) && ($year != 0)){
-				
+				$group_count++;
+				if($group_count != 1)
+					fwrite($groupFile,"\n");
+				$txt1 = $group_count."\n";
 				$result2=mysqli_query($conn,"SELECT user_id FROM user WHERE dept_id=$dept_id AND year=$year ") ;
 				$group_size = mysqli_num_rows($result2);
-				$txt3 = $group_size."\n";
+				$txt3 = $group_size;
 				
 				
 				$myarray[] = array("id" => $group_id, 
@@ -198,20 +186,16 @@ function searchForId($thisgroupid, $array) {
 				fwrite($groupFile, $txt2);
 				fwrite($groupFile, $txt3);
 					 					 
-			}
+			} 
 		$i++;		
 		}
 	}
 	
 fclose($groupFile);
-
 ######   CLASS   #######
-
-
 $classFile=fopen("class.cfg","w");
 // sending query-- select prof_id, sub_id,duration,groups,lab/isNKN(boolian)
 $result = mysqli_query($conn,"SELECT * FROM subjects");
-
 if (!$result) 
 	{
     die("Query to show fields from table failed");
@@ -224,35 +208,44 @@ if($numberOfRows == 0)
 	}
 else if ($numberOfRows > 0) 
 	{
-	$i=0;
+	$i=0;  
+	$flag = 0; 
 	while ($i<$numberOfRows)
 		{		
 			
-			//prof_id, sub_id,duration,groups,lab/isNKN(boolian)
+			//prof_id, sub_id,duration,groups,lab/isNKN(Y/N)
 			$sub_id = MYSQL_RESULT($result,$i,"sub_id");	
 			$sub_code = MYSQL_RESULT($result,$i,"sub_code");
 			$sub_name = MYSQL_RESULT($result,$i,"sub_name");
-			$sub_lechrsprday = MYSQL_RESULT($result,$i,"sub_lechrsprday");
+			$sub_lechrsprWeek = MYSQL_RESULT($result,$i,"sub_lechrsprday");
 			  
-			    $sub_instructor_id= MYSQL_RESULT($result,$i,"instructor");
-				$result2=mysqli_query($conn,"SELECT teacher_name from profile WHERE teacher_id = '$sub_instructor_id' ");
-				$row2 = mysqli_fetch_array($result2);
-			$sub_instr_name= $row2['teacher_name'];
-			$group_id=substr($sub_code,1,2);
+	    $sub_instructor_id= MYSQL_RESULT($result,$i,"instructor"); 
+		$result2= mysqli_query($conn,"SELECT teacher_name FROM profile WHERE teacher_id = $sub_instructor_id ");		
+			//$data = $result->fetch_array();
+ 			//$sub_instr_name= $data['teacher_name'];
+		
+		$sub_instr_name= MYSQL_RESULT($result2,1,'teacher_name');   
+			   
+			    $temp=substr($sub_code,2,1);             //temp=year
+			    $dept_id=MYSQL_RESULT($result,$i,"dept_id");
+			$group_id=$dept_id.$temp;   //group_id=dept.year	
 			$isNKN = MYSQL_RESULT($result,$i,"isNKN");
 			
-			
-			
-			fwrite($classFile,$sub_instr_name."\n" );
+			$sub_lechrsprDay=1;               
+		while($sub_lechrsprWeek >0){			//writing a class 'L'=lechrsprweek times in class.cfg file
+			if($flag != 0)
+				fwrite($classFile,"\n");
+			$flag = 1;
+			fwrite($classFile,$sub_instructor_id."\n" );
 			fwrite($classFile, $sub_id."\n" );
-			fwrite($classFile,$sub_lechrsprday."\n" );
+			fwrite($classFile,$sub_lechrsprDay."\n" );
 			fwrite($classFile,$group_id."\n" );
-			fwrite($classFile,$isNKN."\n" );
-			
+			fwrite($classFile,$isNKN);
+			$sub_lechrsprWeek-=1;
+		}
 		$i++;		
 		}
 	}
 	
 fclose($classFile);
-
 ?> 
