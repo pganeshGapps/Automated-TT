@@ -25,12 +25,12 @@
    if (isset($_POST['cmdSubmit'])) 
   	{ 		
 		
-		if (trim($_POST['pteacher']) == ""){ $flagcourse = 'Required Field.';}
+		if ($_POST['pteacher']){ header(
+			 		"Location: search_t_result.php?pT=". $_POST['pteacher']				
+		 		   );	}
 
 $hidden_pcourse= $_POST['hidden_pt'];
-			 header(
-			 		"Location: search_t_result.php?pT=". $_POST['pteacher']				
-		 		   );				   				   
+			 			   				   
 			}
 ?>
 <body>
@@ -130,9 +130,9 @@ $hidden_pcourse= $_POST['hidden_pt'];
   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
 				$result = mysqli_query($conn,"SELECT * FROM profile ORDER BY teacher_name ");			  	
-				do {  ?>
-  <option value="<?php echo $row['teacher_id'];?>"><?php echo $row['teacher_name'];?> </option>
-  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
+				while ($row = mysqli_fetch_assoc($result)){ ?>
+<option value="<?php echo $row['teacher_id'];?>"><?php echo $row['teacher_name'];?> </option>
+  <?php } ?>
 </select>
 <!-- 
 			Setting up the correct combo box width alignment to table

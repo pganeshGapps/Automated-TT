@@ -25,12 +25,12 @@
    if (isset($_POST['cmdSubmit'])) 
   	{ 		
 		
-		if (trim($_POST['pRoom']) == ""){ $flagcourse = 'Required Field.';}
+		if ($_POST['pRoom']){ header(
+			 		"Location: search_r_result.php?pR=". $_POST['pRoom']				
+		 		   );}
 
 $hidden_pcourse= $_POST['hidden_pcourse'];
-			 header(
-			 		"Location: search_r_result.php?pR=". $_POST['pRoom']				
-		 		   );				   				   
+			 				   				   
 			}
 ?>
 <body>
@@ -130,9 +130,9 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
 				$result = mysqli_query($conn,"SELECT * FROM room ORDER BY room_name ");			  	
-				do {  ?>
+				 while ($row = mysqli_fetch_assoc($result)) {  ?>
   <option value="<?php echo $row['room_id'];?>"><?php echo $row['room_name'];?> </option>
-  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
+  <?php } ?>
 </select>
 
                 <!-- 

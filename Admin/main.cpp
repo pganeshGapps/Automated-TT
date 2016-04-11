@@ -16,6 +16,7 @@ int main(int argc, char *argsv[])
     vector<list<CourseClass*> > slots = best->GetSlots();
     ofstream out("tt.cfg");
     int room_id = 0, day_id = 0, slot_id = 0;
+
     for(int i=0;i<slots.size();i++)
     {
         if(i % (DAY_HOURS * Configuration::GetInstance().GetNumberOfRooms()) == 0)
@@ -39,11 +40,13 @@ int main(int argc, char *argsv[])
             list<StudentsGroup*>::const_iterator groups = ((*it)->GetGroups()).begin();
             for(int i=0;i< (*it)->GetGroups().size();i++)
             {
-                out << ((*groups)->GetId()) <<" ";
+                out << ((*groups)->GetName()) <<" ";
                 groups++;
             }
             out << endl;
-            out << room_id << endl;
+            out << room_id;
+            if(i != slots.size() - 1)
+                out << endl;
         }
         else
         {
@@ -52,7 +55,9 @@ int main(int argc, char *argsv[])
             out << -1 << endl;
             out << -1 << endl;
             out << -1 << endl;
-            out << room_id << endl;
+            out << room_id;
+            if(i != slots.size() - 1)
+                out << endl;
         }
     }
     return 0;

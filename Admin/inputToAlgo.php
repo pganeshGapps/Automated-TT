@@ -245,11 +245,11 @@ else if ($numberOfRows > 0)
 			$sub_lechrsprWeek = MYSQL_RESULT($result,$i,"sub_lechrsprday");
 			  
 	    $sub_instructor_id= MYSQL_RESULT($result,$i,"instructor"); 
-		$result2= mysqli_query($conn,"SELECT teacher_name FROM profile WHERE teacher_id = $sub_instructor_id ");		
+		$result2= mysqli_query($conn,"SELECT teacher_id FROM profile WHERE teacher_id = $sub_instructor_id ");		
 			//$data = $result->fetch_array();
  			//$sub_instr_name= $data['teacher_name'];
 		
-		$sub_instr_name= MYSQL_RESULT($result2,1,'teacher_name');   
+		$sub_instr_id= MYSQL_RESULT($result2,1,'teacher_id');   
 			   
 			    $temp=substr($sub_code,2,1);             //temp=year
 			    $dept_id=MYSQL_RESULT($result,$i,"dept_id");
@@ -261,7 +261,7 @@ else if ($numberOfRows > 0)
 			if($flag != 0)
 				fwrite($classFile,"\n");
 			$flag = 1;
-			fwrite($classFile,$sub_instructor_id."\n" );
+			fwrite($classFile,$sub_instr_id."\n" );
 			fwrite($classFile, $sub_id."\n" );
 			fwrite($classFile,$sub_lechrsprDay."\n" );
 			fwrite($classFile,$group_id."\n" );

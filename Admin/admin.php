@@ -1,3 +1,4 @@
+
 <?php if (empty($session)) { session_start(); } ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -117,12 +118,19 @@ if (isset($_POST['cmdSubmit']))
 				<script type="text/javascript">
 				$(document).ready(function()
 				{
+					<?php 
+					function MYSQL_RESULT($result, $row, $field = 0) {
+ 			   // Adjust the result pointer to that specific row
+    			@$result->data_seek($row);
+ 			   // Fetch result array
+ 			   $data = $result->fetch_array();
+ 			   return $data[$field];
+				}	
+					?>
 					$("button").click(function()
 					{
 						<?php
-/*###########INPUT FILES WRITING
-						
-############  END WRITING*/
+
 						exec("main.exe",$output);
 						mysqli_query($conn,"DELETE FROM sched ");
 						$myfile = fopen("tt.cfg", "r") or die("Unable to open file!");
@@ -135,11 +143,10 @@ if (isset($_POST['cmdSubmit']))
 							$line5 = fgets($myfile);
 							$line6 = intval(fgets($myfile));
 							$t = $line2+1;
-							mysqli_query($conn,"INSERT INTO sched (sched_id, room_id, course_id, sub_id, teacher_id, time_s_id, time_e_id, day_id, sem_id, year_id, dept_id) VALUES(0,$line6,0,$line3,$line4,$line2,$t,$line1,0,0,0) ");
+							mysqli_query($conn,"INSERT INTO sched (sched_id, room_id, course_id, sub_id, teacher_id, time_s_id, time_e_id, day_id, sem_id, year_id, dept_id, group_name) VALUES(0,$line6,0,$line3,$line4,$line2,$t,$line1,0,0,0,$line5) ");
 						}while(!feof($myfile));
 
 						fclose($myfile);
-						mysqli_query($conn,"DELETE FROM sched WHERE teacher_id=0");
 
 						?>
 					});
