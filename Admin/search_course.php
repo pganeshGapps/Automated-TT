@@ -25,18 +25,14 @@
    if (isset($_POST['cmdSubmit'])) 
   	{ 		
 		
-		if (trim($_POST['pcourse']) == ""){ $flagcourse = 'Required Field.';}	
-		if (trim($_POST['psy']) == ""){ $flagsy= 'Required Field.';}
-		if (trim($_POST['psem']) == ""){ $flagsy= 'Required Field.';}
+		if ($_POST['psem']){header(
+			 		"Location: search_g_result.php?pG=". $_POST['psem'] 					
+		 		   );}
 
 //if (($flagcourse == "") && ($flagsy == ""))
 //{
 $hidden_pcourse= $_POST['hidden_pcourse'];
-			 header(
-			 		"Location: search_c_result.php?pCourse=". $_POST['pcourse'] 
-					."&pSy=". $_POST['psy'] 
-					."&psem=". $_POST['psem'] 					
-		 		   );				   				   
+			 				   				   
 		//	}		 	 
 			
 			}
@@ -135,17 +131,8 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
 		  </div>
 		  <table width="448" border="0" align="center" >
             <tr >
-              <td width="76" height="34" ><div align="right" class="style3">Course</div></td>
-              <td width="342"  ><span class="style22">
-                <label>
-<select name="pcourse"  id="pcourse" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
-  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM course ORDER BY course_yrSec ");			  	
-				do {  ?>
-  <option value="<?php echo $row['course_id'];?>"><?php echo $row['course_yrSec'];?> </option>
-  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-</select>
+              
+                              
 <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
@@ -154,40 +141,33 @@ $hidden_pcourse= $_POST['hidden_pcourse'];
                 <input type="hidden" id="hidden_pcourse" name="hidden_pcourse" value="<?PHP echo trim($_POST['hidden_pcourse']); ?>"/>
               </label>
               </span></td>
-              <td width="16" ><span class="style21"><span class="style20"><?php echo $flagcourse; ?></span></span></td>
-            </tr>
-            <tr   >
-              <td height="34"><div align="right" class="style3">School Year </div></td>
-              <td  ><span class="style22">
-                <label>
-                <select name="psy"  id="psy" style="width: 267px" onchange="javascript: return optionList7_SelectedIndex()">
-                  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM school_yr ORDER BY school_year ");			  	
-				do {  ?>
-                  <option value="<?php echo $row['year_id'];?>"><?php echo $row['school_year'];?> </option>
-                  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-                </select>
-                <!-- 
-			Setting up the correct combo box width alignment to table
-			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
-		-->
-                <input type="hidden" id="hidden_psyid" name="hidden_psyid"  value="<?PHP echo trim($_POST['hidden_psyid']); ?>" />
-                <input type="hidden" id="hidden_psy" name="hidden_psy" value="<?PHP echo trim($_POST['hidden_psy']); ?>"/>
-                </label>
-              </span></td>
-              <td><span class="style21"><span class="style20"><?php echo $flagsy; ?></span></span></td>
-            </tr> 
-            <tr   >
-              <td height="34"><div align="right" class="style3">Semester</div></td>
+                 <tr   >
+              <td height="34"><div align="right" class="style3"> Group_ID </div></td>
               <td  ><span class="style22">
                 <label>
                 <select name="psem"  id="psem" style="width: 267px" onchange="javascript: return optionList1_SelectedIndex()">
                   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM sem ORDER BY semester ");			  	
+				//$result = mysqli_query($conn,"SELECT * FROM sem ORDER BY semester ");
+				$result = mysqli_query($conn,"SELECT group_id,dept_id FROM subjects ORDER BY dept_id ");
+				
+
+				if (!$result) 
+					{
+    					die("Query to show fields from table failed");
+					}	
+				//Retrieving function_exists
+				function mysql_result($result, $row, $field = 0) {
+ 			   // Adjust the result pointer to that specific row
+    			@$result->data_seek($row);
+ 			   // Fetch result array
+ 			   $data = $result->fetch_array();
+ 			   return $data[$field];
+				}	
+		  	
 				do {  ?>
-                  <option value="<?php echo $row['sem_id'];?>"><?php echo $row['semester'];?> </option>
+                  <option value="<?php echo  $row['group_id'];?>"><?php echo  $row['group_id'];?> </option>
+                  
                   <?php } while ($row = mysqli_fetch_assoc($result)); ?>
                 </select>
                 <!-- 
