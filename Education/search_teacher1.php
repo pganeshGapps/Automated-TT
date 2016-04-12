@@ -25,22 +25,16 @@
    if (isset($_POST['cmdSubmit'])) 
   	{ 		
 		
-		//if (trim($_POST['pteacher']) == ""){ $flagcourse = 'Required Field.';}
+		if (trim($_POST['pteacher']) == ""){ $flagcourse = 'Required Field.';}	
+		if (trim($_POST['psy']) == ""){ $flagsy= 'Required Field.';}
+		if (trim($_POST['psem']) == ""){ $flagsy= 'Required Field.';}
 
 $hidden_pcourse= $_POST['hidden_pt'];
-$check123 = mysqli_query($conn,"SELECT * FROM profile WHERE teacher_id = '".$_POST['pteacher']."'")or die(mysqli_error($conn));
-//echo $_POST['pteacher'];
-$info12 = mysqli_fetch_array( $check123 );
-//$fieldinfo=mysqli_fetch_field($check)
-if($_REQUEST['pass'] == $info12["userpass"]){
 			 header(
-			 		"Location: search_t_result.php?pT=". $_POST['pteacher']				
-		 		   );
-}
-else{
-	$error = "Incorrect Password";
-}
-				   
+			 		"Location: search_t_result.php?pT=". $_POST['pteacher'] 
+					."&pSy=". $_POST['psy'] 
+					."&psem=". $_POST['psem'] 					
+		 		   );				   				   
 			}
 ?>
 <body>
@@ -49,12 +43,12 @@ else{
     <img src="../images/logo copy.jpg" alt="s" width="717" height="160" />
     <div id="logo_w2"></div>
     <ul class="cssMenu cssMenum">
-	<li class=" cssMenui"><a class="  cssMenui" href="../index.php"><img src="../images/homepage.gif" />Home</a></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<li class=" cssMenui"><a class="  cssMenui" href="index.php"><img src="../images/homepage.gif" />Home</a></li>
+	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
 		<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Teacher Schedule</a></li>
-		<!--<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>-->
+		<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
@@ -118,7 +112,7 @@ else{
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	<li class=" cssMenui"><a class="  cssMenui" href="User Manual.pdf">Help</a></li>
 
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="logout.php">Log out</a></li>-->
+	<li class=" cssMenui"><a class="  cssMenui" href="logout.php">Log out</a></li>
 </ul>
 
   </div>
@@ -148,7 +142,46 @@ else{
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
-                
+                <input type="hidden" id="hidden_ptid" name="hidden_ptid"  value="<?PHP echo trim($_POST['hidden_ptid']); ?>" />
+                <input type="hidden" id="hidden_pt" name="hidden_pt" value="<?PHP echo trim($_POST['hidden_pt']); ?>"/>
+              </label>
+              </span></td>
+              <td width="16" ><span class="style21"><span class="style20"><?php echo $flagcourse; ?></span></span></td>
+            </tr>
+            <tr   >
+              <td height="34"><div align="right" class="style3">School Year </div></td>
+              <td  ><span class="style22">
+                <label>
+                <select name="psy"  id="psy" style="width: 267px" onchange="javascript: return optionList7_SelectedIndex()">
+                  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
+			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
+				$result = mysqli_query($conn,"SELECT * FROM school_yr ORDER BY school_year ");			  	
+				do {  ?>
+                  <option value="<?php echo $row['year_id'];?>"><?php echo $row['school_year'];?> </option>
+                  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
+                </select>
+                <!-- 
+			Setting up the correct combo box width alignment to table
+			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
+		-->
+                <input type="hidden" id="hidden_psyid" name="hidden_psyid"  value="<?PHP echo trim($_POST['hidden_psyid']); ?>" />
+                <input type="hidden" id="hidden_psy" name="hidden_psy" value="<?PHP echo trim($_POST['hidden_psy']); ?>"/>
+                </label>
+              </span></td>
+              <td><span class="style21"><span class="style20"><?php echo $flagsy; ?></span></span></td>
+            </tr> 
+            <tr   >
+              <td height="34"><div align="right" class="style3">Semester</div></td>
+              <td  ><span class="style22">
+                <label>
+                <select name="psem"  id="psem" style="width: 267px" onchange="javascript: return optionList1_SelectedIndex()">
+                  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
+			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
+				$result = mysqli_query($conn,"SELECT * FROM sem ORDER BY semester ");			  	
+				do {  ?>
+                  <option value="<?php echo $row['sem_id'];?>"><?php echo $row['semester'];?> </option>
+                  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
+                </select>
                 <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
@@ -158,17 +191,12 @@ else{
                 </label>
               </span></td>
               <td><span class="style21"><span class="style20"><?php echo $flagsem; ?></span></span></td>
-			  <td>Password:</td>
-              <td><input type="password" name="pass" maxlength="50" />
-              </td>
             </tr>
           </table>
-		  
 		  <p align="center"><span class="style30">
 	      <input type="submit" name="cmdSubmit" value="Next" />
 	      &nbsp;</span></p>
 	  </form>
-	  <div class="style31" id="Layer2"><?php echo $error;?></div>
     </div>
 		<div id="program"></div>
 		<div id="right">
@@ -177,7 +205,7 @@ else{
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling System</a><a href="www.chmsc.edu.ph"></a></span></p>
+		  <!--<p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling System</a><a href="www.chmsc.edu.ph"></a></span></p>-->
 	  </div>
 	</div>
 	

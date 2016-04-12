@@ -57,13 +57,6 @@ error_reporting( error_reporting() & ~E_NOTICE );
 			 		"Location: Education/search_teacher.php"	
 		 		   );				   				   
 			}
-   if (isset($_POST['cmdSubmit3'])) 
-  	{ 		
-		
-			 header(
-			 		"Location: index1.php"	
-		 		   );				   				   
-			}
   $user =$_REQUEST['username'];
 
 //if (isset($_GET["action"]) && ($_GET["action"] == "login")) {
@@ -309,7 +302,7 @@ else
             <tr>
               <td colspan="2"><h1 align="center">User Login</h1></td>
             </tr>
-           <!-- <tr>
+           <tr>
               <td>Username:</td>
               <td><input type="text" name="username" maxlength="40" />
               </td>
@@ -326,28 +319,14 @@ else
                <tr>
               <td colspan="2" align="center">
               </td>
-            </tr>-->
-			<tr>
-			<td><input type="submit" name="cmdSubmit1" value="Admin Login" />
-			</td>
-			</tr>
-			<tr>
-			<td><input type="submit" name="cmdSubmit3" value="Student Login" />
-			</td>
-			</tr>
-			<tr>
-			<td><input type="submit" name="cmdSubmit2" value="Faculty Login" />
-			</td>
-			</tr>
+            </tr>
+			
           </table>
 		  <p>&nbsp;</p>
-		  <form action="<?php echo $_SERVER[PHP_SELF] ?>" name="form11" method="post" >
-			  	
+		  	  	
 			  </form>
 		  <p>&nbsp;</p>
-		  <form action="<?php echo $_SERVER[PHP_SELF] ?>" name="form12" method="post" >
-			  	
-			  </form>
+		 
 		  <p>&nbsp;</p>
 		  <p>&nbsp;</p>
 		  <p>&nbsp;</p>

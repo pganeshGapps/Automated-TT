@@ -97,13 +97,13 @@
 		    <p align="center"><span class="style32">Schedule of Class </span> </p>
             <p>
               <?php 	$pSy =$_REQUEST['pSy'];				
-				$result = mysql_query("SELECT * FROM school_yr HAVING year_id='$pSy'");
+				$result = mysqli_query($conn,"SELECT * FROM school_yr HAVING year_id='$pSy'");
 				
 if (!$result) 
 		{
 		die("Query to show fields from table failed");
 		}
-			$numberOfRows = MYSQL_NUMROWS($result);
+			$numberOfRows = MYSQLi_NUM_ROWS($result);
 	
 			If ($numberOfRows == 0) 
 				{
@@ -118,13 +118,13 @@ if (!$result)
 				
 				}
 				$psem=$_REQUEST['psem'];
-				$result = mysql_query("SELECT * FROM sem HAVING sem_id='$psem'");
+				$result = mysqli_query($conn,"SELECT * FROM sem HAVING sem_id='$psem'");
 				
 if (!$result) 
 		{
 		die("Query to show fields from table failed");
 		}
-			$numberOfRows = MYSQL_NUMROWS($result);
+			$numberOfRows = MYSQLi_NUM_ROWS($result);
 	
 			If ($numberOfRows == 0) 
 				{
@@ -143,12 +143,12 @@ if (!$result)
                 <td colspan = "4"><span class="style32" >
                   <?php 
 				$pT =$_REQUEST['pT'];
-				$result1 = mysql_query("SELECT * FROM profile HAVING teacher_id='$pT'");
+				$result1 = mysqli_query($conn,"SELECT * FROM profile HAVING teacher_id='$pT'");
 if (!$result1) 
 		{
 		die("Query to show fields from table failed");
 		}
-			$numberOfRows = MYSQL_NUMROWS($result1);
+			$numberOfRows = MYSQLi_NUM_ROWS($result1);
 	
 			If ($numberOfRows == 0) 
 				{
@@ -167,14 +167,14 @@ if (!$result1)
 			$pSy =$_REQUEST['pSy'];
 			$psem=$_REQUEST['psem'];
 
-			$result = mysql_query("SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name` ,`timestart`.`time_s`,`day`.`day_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile`,`timestart` ,`day`,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id and sched.time_s_id=timestart.time_s_id and sched.day_id=day.day_id 
+			$result = mysqli_query($conn,"SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name` ,`timestart`.`time_s`,`day`.`day_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile`,`timestart` ,`day`,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id and sched.time_s_id=timestart.time_s_id and sched.day_id=day.day_id 
  and sched.year_id=school_yr.year_id HAVING teacher_id='$pT' and sem_id='$psem' and year_id='$pSy'
   			");
 		if (!$result) 
 			{
 			die("Query to show fields from table failed");
 			}
-		$numberOfRows = MYSQL_NUMROWS($result);
+		$numberOfRows = MYSQLi_NUM_ROWS($result);
 		
 		echo $numberOfRows;
 		
@@ -194,13 +194,13 @@ if (!$result1)
 			$pSy =$_REQUEST['pSy'];
 			$psem=$_REQUEST['psem'];
 
-			$result = mysql_query("SELECT `sched`.* ,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name` ,`timestart`.`time_s`,`day`.`day_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile`,`timestart` ,`day`,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id and sched.time_s_id=timestart.time_s_id and sched.day_id=day.day_id 
+			$result = mysqli_query($conn,"SELECT `sched`.* ,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name` ,`timestart`.`time_s`,`day`.`day_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile`,`timestart` ,`day`,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id and sched.time_s_id=timestart.time_s_id and sched.day_id=day.day_id 
  and sched.year_id=school_yr.year_id HAVING teacher_id='$pT' and sem_id='$psem' and year_id='$pSy' and dept_id = 1");
 		if (!$result) 
 			{
 			die("Query to show fields from table failed");
 			}
-		$numberOfRows = MYSQL_NUMROWS($result);
+		$numberOfRows = MYSQLi_NUM_ROWS($result);
 		
 		If ($numberOfRows == 0) 
 			{
@@ -255,13 +255,13 @@ if (!$result1)
 			$pSy =$_REQUEST['pSy'];
 			$psem=$_REQUEST['psem'];
 
-			$result = mysql_query("SELECT `sched`.* ,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name` ,`timestart`.`time_s`,`day`.`day_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile`,`timestart` ,`day`,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id and sched.time_s_id=timestart.time_s_id and sched.day_id=day.day_id 
+			$result = mysqli_query($conn,"SELECT `sched`.* ,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name` ,`timestart`.`time_s`,`day`.`day_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile`,`timestart` ,`day`,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id and sched.time_s_id=timestart.time_s_id and sched.day_id=day.day_id 
  and sched.year_id=school_yr.year_id HAVING teacher_id='$pT' and sem_id='$psem' and year_id='$pSy' and dept_id = 2");
 		if (!$result) 
 			{
 			die("Query to show fields from table failed");
 			}
-		$numberOfRows = MYSQL_NUMROWS($result);
+		$numberOfRows = MYSQLi_NUM_ROWS($result);
 		
 		If ($numberOfRows == 0) 
 			{
@@ -316,13 +316,13 @@ if (!$result1)
 			$pSy =$_REQUEST['pSy'];
 			$psem=$_REQUEST['psem'];
 
-			$result = mysql_query("SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name` ,`timestart`.`time_s`,`day`.`day_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile`,`timestart` ,`day`,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id and sched.time_s_id=timestart.time_s_id and sched.day_id=day.day_id 
+			$result = mysqli_query($conn,"SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name` ,`timestart`.`time_s`,`day`.`day_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile`,`timestart` ,`day`,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id and sched.time_s_id=timestart.time_s_id and sched.day_id=day.day_id 
  and sched.year_id=school_yr.year_id HAVING teacher_id='$pT' and sem_id='$psem' and year_id='$pSy' and dept_id = 3");
 		if (!$result) 
 			{
 			die("Query to show fields from table failed");
 			}
-		$numberOfRows = MYSQL_NUMROWS($result);
+		$numberOfRows = MYSQLi_NUM_ROWS($result);
 		
 		If ($numberOfRows == 0) 
 			{
@@ -406,7 +406,7 @@ if (!$result1)
 			$pSy =$_REQUEST['pSy'];
 			$psem=$_REQUEST['psem'];
 
-			$result = mysql_query("SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile` ,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id
+			$result = mysqli_query($conn,"SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile` ,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id
  and sched.year_id=school_yr.year_id HAVING teacher_id='$pT' and sem_id='$psem' and year_id='$pSy'
   			");
 			//HAVING course_id='$pCourse' and sem_id='$psem' and year_id='$pSy'
@@ -414,7 +414,7 @@ if (!$result1)
 			{
 			die("Query to show fields from table failed");
 			}
-		$numberOfRows = MYSQL_NUMROWS($result);
+		$numberOfRows = MYSQLi_NUM_ROWS($result);
 		
 		If ($numberOfRows == 0) 
 			{
@@ -448,7 +448,7 @@ if (!$result1)
 			$pSy =$_REQUEST['pSy'];
 			$psem=$_REQUEST['psem'];
 
-			$result = mysql_query("SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile` ,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id
+			$result = mysqli_query($conn,"SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile` ,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id
  and sched.year_id=school_yr.year_id HAVING teacher_id='$pT' and sem_id='$psem' and year_id='$pSy'
   			");
 			//HAVING course_id='$pCourse' and sem_id='$psem' and year_id='$pSy'
@@ -456,7 +456,7 @@ if (!$result1)
 			{
 			die("Query to show fields from table failed");
 			}
-		$numberOfRows = MYSQL_NUMROWS($result);
+		$numberOfRows = MYSQLi_NUM_ROWS($result);
 		
 		If ($numberOfRows == 0) 
 			{
@@ -490,7 +490,7 @@ if (!$result1)
 			$pSy =$_REQUEST['pSy'];
 			$psem=$_REQUEST['psem'];
 
-			$result = mysql_query("SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile` ,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id
+			$result = mysqli_query($conn,"SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile` ,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id
  and sched.year_id=school_yr.year_id HAVING teacher_id='$pT' and sem_id='$psem' and year_id='$pSy'
   			");
 			//HAVING course_id='$pCourse' and sem_id='$psem' and year_id='$pSy'
@@ -498,7 +498,7 @@ if (!$result1)
 			{
 			die("Query to show fields from table failed");
 			}
-		$numberOfRows = MYSQL_NUMROWS($result);
+		$numberOfRows = MYSQLi_NUM_ROWS($result);
 		
 		If ($numberOfRows == 0) 
 			{
@@ -532,7 +532,7 @@ if (!$result1)
 			$pSy =$_REQUEST['pSy'];
 			$psem=$_REQUEST['psem'];
 
-			$result = mysql_query("SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile` ,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id
+			$result = mysqli_query($conn,"SELECT `sched`.*,`room`.`room_name` ,`course`.`course_yrSec`,`subjects`.`sub_code`,`profile`.`teacher_name`,`school_yr`.`school_year` FROM `sched`,`room`,`course`,`subjects`,`profile` ,`school_yr`  WHERE sched.room_id=room.room_id and sched.course_id=course.course_id and sched.sub_id=subjects.sub_id and sched.teacher_id=profile.teacher_id
  and sched.year_id=school_yr.year_id HAVING teacher_id='$pT' and sem_id='$psem' and year_id='$pSy'
   			");
 			//HAVING course_id='$pCourse' and sem_id='$psem' and year_id='$pSy'

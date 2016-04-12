@@ -21,27 +21,23 @@
 <?php
    include("../includes/session.php");
   require ("../includes/dbconnection.php");
-
    if (isset($_POST['cmdSubmit'])) 
   	{ 		
 		
-		//if (trim($_POST['pteacher']) == ""){ $flagcourse = 'Required Field.';}
-
-$hidden_pcourse= $_POST['hidden_pt'];
-$check123 = mysqli_query($conn,"SELECT * FROM profile WHERE teacher_id = '".$_POST['pteacher']."'")or die(mysqli_error($conn));
-//echo $_POST['pteacher'];
-$info12 = mysqli_fetch_array( $check123 );
-//$fieldinfo=mysqli_fetch_field($check)
-if($_REQUEST['pass'] == $info12["userpass"]){
-			 header(
-			 		"Location: search_t_result.php?pT=". $_POST['pteacher']				
-		 		   );
-}
-else{
-	$error = "Incorrect Password";
-}
-				   
+		if ($_POST['psem']){header(
+			 		"Location: search_g_result.php?pG=". $_POST['psem'] 					
+		 		   );}
+//if (($flagcourse == "") && ($flagsy == ""))
+//{
+$hidden_pcourse= $_POST['hidden_pcourse'];
+			 				   				   
+		//	}		 	 
+			
 			}
+		 //	$hidden_pcourse= $_POST['hidden_pcourseid'];
+		//	$hidden_psy= $_POST['hidden_psyid'];
+			
+			
 ?>
 <body>
 <div id="container">
@@ -49,15 +45,15 @@ else{
     <img src="../images/logo copy.jpg" alt="s" width="717" height="160" />
     <div id="logo_w2"></div>
     <ul class="cssMenu cssMenum">
-	<li class=" cssMenui"><a class="  cssMenui" href="../index.php"><img src="../images/homepage.gif" />Home</a></li>
+	<li class=" cssMenui"><a class="  cssMenui" href="admin.php"><img src="../images/homepage.gif" />Home</a></li>
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
 		<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Teacher Schedule</a></li>
-		<!--<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>-->
+		<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
 		<li class=" cssMenui"><a class="  cssMenui" href="user.php"><span><img src="../images/user.ico" />User</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
@@ -108,7 +104,7 @@ else{
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>-->
+	<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
@@ -118,7 +114,7 @@ else{
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	<li class=" cssMenui"><a class="  cssMenui" href="User Manual.pdf">Help</a></li>
 
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="logout.php">Log out</a></li>-->
+	<li class=" cssMenui"><a class="  cssMenui" href="logout.php">Log out</a></li>
 </ul>
 
   </div>
@@ -133,22 +129,61 @@ else{
 		  </div>
 		  <table width="448" border="0" align="center" >
             <tr >
-              <td width="76" height="34" ><div align="right" class="style3">Teacher</div></td>
-              <td width="342"  ><span class="style22">
-                <label>
-<select name="pteacher"  id="pteacher" style="width: 267px" onchange="javascript: return optionList_SelectedIndex()">
-  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
-			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
-				$result = mysqli_query($conn,"SELECT * FROM profile ORDER BY teacher_name ");			  	
-				do {  ?>
-  <option value="<?php echo $row['teacher_id'];?>"><?php echo $row['teacher_name'];?> </option>
-  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
-</select>
+              
+                              
 <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
 		-->
-                
+                <input type="hidden" id="hidden_pcourseid" name="hidden_pcourseid"  value="<?PHP echo trim($_POST['hidden_pcourseid']); ?>" />
+                <input type="hidden" id="hidden_pcourse" name="hidden_pcourse" value="<?PHP echo trim($_POST['hidden_pcourse']); ?>"/>
+              </label>
+              </span></td>
+                 <tr   >
+              <td height="34"><div align="right" class="style3"> Group_ID </div></td>
+              <td  ><span class="style22">
+                <label>
+                <select name="psem"  id="psem" style="width: 267px" onchange="javascript: return optionList1_SelectedIndex()">
+                  <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
+			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
+				//$result = mysqli_query($conn,"SELECT * FROM sem ORDER BY semester ");
+				$result = mysqli_query($conn,"SELECT group_id,dept_id FROM subjects ORDER BY dept_id ");
+				
+				if (!$result) 
+					{
+    					die("Query to show fields from table failed");
+					}	
+				//Retrieving function_exists
+				function mysql_result($result, $row, $field = 0) {
+ 			   // Adjust the result pointer to that specific row
+    			@$result->data_seek($row);
+ 			   // Fetch result array
+ 			   $data = $result->fetch_array();
+ 			   return $data[$field];
+				}	
+		  		
+		  		$myarray=array();
+				$i=0;$key=0;
+				##############
+				function searchForId($thisgroupid, $array) {
+					foreach ($array as $key => $val) {
+       								 if ($val['id'] === $thisgroupid) { return $key; }
+   									}
+   					 return (-1);
+				 }
+				###############
+				 while ($row = mysqli_fetch_assoc($result)) {  
+				$group_id= $row['group_id'];
+				$key= searchForId($group_id,$myarray);
+				if($key == (-1) || $i == 0 ){
+					$myarray[] = array("id" => $group_id);
+					$i++;
+					?>
+                  			<option value="<?php echo  $row['group_id'];?>"><?php echo  $row['group_id'];?> </option>
+                  
+                  		<?php 	}else{continue;}
+                  		} ?>
+                </select>
                 <!-- 
 			Setting up the correct combo box width alignment to table
 			source: http://www.eskimo.com/~bloo/indexdot/html/topics/selectwidth.htm
@@ -158,17 +193,12 @@ else{
                 </label>
               </span></td>
               <td><span class="style21"><span class="style20"><?php echo $flagsem; ?></span></span></td>
-			  <td>Password:</td>
-              <td><input type="password" name="pass" maxlength="50" />
-              </td>
             </tr>
           </table>
-		  
 		  <p align="center"><span class="style30">
 	      <input type="submit" name="cmdSubmit" value="Next" />
 	      &nbsp;</span></p>
 	  </form>
-	  <div class="style31" id="Layer2"><?php echo $error;?></div>
     </div>
 		<div id="program"></div>
 		<div id="right">
@@ -177,13 +207,13 @@ else{
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>
 		<div id="footerline">
-		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling System</a><a href="www.chmsc.edu.ph"></a></span></p>
+		  <p align="center"><span class="style4"><a href="help.php">Help</a> | <a href="about_sched.php">Scheduling 	                                System</a>
+                            </span>
+          </p>
 	  </div>
 	</div>
 	
-	<div id="footer">Four Dark Riders</div>	
-</div>
-  </div>
+	<div id="footer">Four Dark Riders</div>		
 </div>
 </body>
 </html>
@@ -219,16 +249,15 @@ else{
 			* text - For an option, what's in between the option tags
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
-
-			var selObj = document.getElementById('pteacher');
+			var selObj = document.getElementById('pcourse');
 			//var txtIndexObj = document.getElementById('txtIndex');
-			var hidden_ptid_ValueObj = document.getElementById('hidden_ptid');
-			var hidden_pt_TextObj = document.getElementById('hidden_pt');
+			var hidden_pcourseid_ValueObj = document.getElementById('hidden_pcourseid');
+			var hidden_pcourse_TextObj = document.getElementById('hidden_pcourse');
 			
 			var selIndex = selObj.selectedIndex;
 			//txtIndexObj.value = selIndex;
-			hidden_ptid_ValueObj.value = selObj.options[selIndex].value;
-			hidden_pt_TextObj.value = selObj.options[selIndex].text;
+			hidden_pcourseid_ValueObj.value = selObj.options[selIndex].value;
+			hidden_pcourse_TextObj.value = selObj.options[selIndex].text;
 		
 			//var form = document.forms[0]; --> Option B
 			<!-- //Passing the data from the databse residence [ID] to hidden field
@@ -249,7 +278,6 @@ function optionList1_SelectedIndex()
 			* text - For an option, what's in between the option tags
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
-
 			var selObj = document.getElementById('psem');
 			//var txtIndexObj = document.getElementById('txtIndex');
 			var hidden_psemid_ValueObj = document.getElementById('hidden_psemid');
@@ -285,7 +313,6 @@ function optionList1_SelectedIndex()
 			* text - For an option, what's in between the option tags
 				  o sea two is the text in the following HTML example
 				  o <option value="val2">sea two</option>*/
-
 			var selObj = document.getElementById('psy');
 			//var txtIndexObj = document.getElementById('txtIndex');
 			var hidden_psyid_ValueObj = document.getElementById('hidden_psyid');
@@ -305,12 +332,12 @@ function optionList1_SelectedIndex()
 		
 		
 </script>	
-
 <script language="javascript" >
 	var form = document.forms[0];
 	//purpose?: to retrieve what users last input on the field..
-	form.pteacher.value = ("<?PHP echo $_POST['hidden_pt']; ?>");
+	form.pcourse.value = ("<?PHP echo $_POST['hidden_pcourse']; ?>");
 	form.psy.value = ("<?PHP echo $_POST['hidden_psem']; ?>");
 	form.psem.value = ("<?PHP echo $_POST['hidden_psem']; ?>");
 	//alert (form.pCityM.value);				
 </script>
+Status 
