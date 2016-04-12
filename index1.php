@@ -68,6 +68,7 @@ if (isset($_POST['submit'])) { // if form has been submitted
 if(!$_POST['username'] | !$_POST['pass']){
 $error ='You did not fill in a required field.';
 }
+
 // checks it against the database
 
 if (!get_magic_quotes_gpc()) {
@@ -78,7 +79,7 @@ $check = mysqli_query($conn,"SELECT * FROM user WHERE username = '".$_POST['user
 //Gives error if user dosen't exist
 $check2 = mysqli_num_rows($check);
 if ($check2 == 0) {
-die('That user does not exist in our database. Please contact the administrator for assistance.');
+die('That user does not exist. Please contact the administrator for assistance.');
 }
 while($info = mysqli_fetch_array( $check )) 
 {
@@ -88,7 +89,7 @@ $_POST['pass'] = $_POST['pass'];
 $dept_id = $info['dept_id'];
 //gives error if the password is wrong
 if ($_POST['pass'] != $info['userpass']) {
-$error ='Incorrect combination, please try again.';
+$error ='Incorrect credentials.';
 }
 else 
 { 
@@ -184,11 +185,11 @@ elseif($info['dept_id'] == '4'){
 		$_SESSION['is']['login']    = TRUE;
 		$_SESSION['is']['username'] = $_POST['username'];
 		$session = "1";	
-
- header(
-			 		"Location: Admin/admin.php?username=". $_POST['username'] 
+$error =  "Admin's login restricted";
+ //header(
+			// 		"Location: Admin/admin.php?username=". $_POST['username'] 
 										
-		 		   );
+		 		//   );
 }
 else{
 	

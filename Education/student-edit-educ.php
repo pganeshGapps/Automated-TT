@@ -95,7 +95,7 @@ if (!$result)
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>
+	 
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">

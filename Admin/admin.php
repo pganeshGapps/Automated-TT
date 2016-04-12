@@ -1,4 +1,3 @@
-
 <?php if (empty($session)) { session_start(); } ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -90,12 +89,12 @@ if (isset($_POST['cmdSubmit']))
 	<!-- Add School year -->
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>
+	 
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
 		<li class=" cssMenui"><a class="  cssMenui" href="about_sched.php"><img src="../images/scheduling.png" />Scheduling System</a></li>
-		<li class=" cssMenui"></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="about_dev.php"><img src="../images/dev.png" />Developer</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	<li class=" cssMenui"><a class="  cssMenui" href="User Manual.pdf">Help</a></li>

@@ -32,13 +32,13 @@ $check123 = mysqli_query($conn,"SELECT * FROM profile WHERE teacher_id = '".$_PO
 //echo $_POST['pteacher'];
 $info12 = mysqli_fetch_array( $check123 );
 //$fieldinfo=mysqli_fetch_field($check)
-if($_REQUEST['pass'] == $info12["userpass"]){
+if($_REQUEST['pass'] == $info12["userpass"] && $_REQUEST['pass']){
 			 header(
 			 		"Location: search_t_result.php?pT=". $_POST['pteacher']				
 		 		   );
 }
 else{
-	$error = "Incorrect Password";
+	$error = "Incorrect Credentials";
 }
 				   
 			}
@@ -108,7 +108,7 @@ else{
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>-->
+	<!-- -->
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
@@ -140,9 +140,9 @@ else{
   <?php // source 1: http://www.dmxzone.com/showDetail.asp?NewsId=5102&TypeId=25
 			  	// source 2: http://localhost/phpmyadmin/index.php?db=mydbase&token=651c0063e511c381c9c82ce1fe9b6854
 				$result = mysqli_query($conn,"SELECT * FROM profile ORDER BY teacher_name ");			  	
-				do {  ?>
+				while ($row = mysqli_fetch_assoc($result)) {  ?>
   <option value="<?php echo $row['teacher_id'];?>"><?php echo $row['teacher_name'];?> </option>
-  <?php } while ($row = mysqli_fetch_assoc($result)); ?>
+  <?php }  ?>
 </select>
 <!-- 
 			Setting up the correct combo box width alignment to table

@@ -50,7 +50,7 @@ $check = mysqli_query($conn,"SELECT * FROM user WHERE username = '".$_POST['user
 //Gives error if user dosen't exist
 $check2 = mysqli_num_rows($check);
 if ($check2 == 0) {
-$error ='That user does not exist in our database. Please contact the administrator to ask for assistance.';
+$error ='That user does not exist. Please contact the administrator to ask for assistance.';
 }
 while($info = mysqli_fetch_array( $check )) 
 {
@@ -60,7 +60,7 @@ $_POST['pass'] = $_POST['pass'];
 $dept_id = $info['dept_id'];
 //gives error if the password is wrong
 if ($_POST['pass'] != $info['userpass']) {
-$error ='Incorrect combination, please try again.';
+$error ='Invalid credentials';
 }
 else 
 { 
@@ -170,7 +170,7 @@ else
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>-->
+	<!-- -->
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
