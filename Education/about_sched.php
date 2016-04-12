@@ -84,7 +84,8 @@ include("../includes/session.php");
 		      <p><br />
 	      </p><div id="Layer1">
 	        <p align="justify"><strong>Tools Used: </strong></p>
-  <p align="justify">In  developing the system, the developers used Php and MySql language. </p>
+  <p align="justify">In  developing the system, the developers mainly used Php and MySql technologies with some functional help of Javascript.Also our efficient algorithm is in C++.
+  We used GITHUB for version controll.Using Dreamweaver for designing saved our lot of time.Overall,it was good learning experience and we enjoyed the team work too!</p>
  <!-- <p align="justify"><strong>Functionality of the system:</strong></p>
   <p align="justify">The  system is composed of 6 main forms with submenus. The Home menu is the main  page of the system. The Search Menu consists of three minor links; teacher,  student and room. The Add Entry has seven links; User, Teacher, Course,  Subject, Room and Department, School Year. The Schedule menu has Course, Year  and Section, semester and School Year, Teacher, Room, Day(s), Starting Time and  Ending Time and the Help menu.</p>-->
   </div>

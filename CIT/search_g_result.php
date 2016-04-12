@@ -25,14 +25,14 @@
 <?php
    include("../includes/session.php");
   require ("../includes/dbconnection.php");
-	//$pT = $user_id;
-			//$prof =$_REQUEST['pT'];
+
+			$prof =$_REQUEST['pG'];
 
 			if (isset($_POST['cmdSubmit'])) 
   	{ 		
 		
 			 header(
-			 		"Location: teacher_result.php?pT=". $user_id					
+			 		"Location: group_result.php?pG=". $pG					
 		 		   );				   				   
 			}
 			
@@ -43,15 +43,15 @@
     <img src="../images/logo copy.jpg" alt="s" width="717" height="160" />
     <div id="logo_w2"></div>
     <ul class="cssMenu cssMenum">
-	<li class=" cssMenui"><a class="  cssMenui" href="index.php"><img src="../images/homepage.gif" />Home</a></li>
+	<li class=" cssMenui"><a class="  cssMenui" href="admin.php"><img src="../images/homepage.gif" />Home</a></li>
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Search</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
 		<li class=" cssMenui"><a class="  cssMenui" href="search_teacher.php"><img src="../images/User (1).ico" />Teacher Schedule</a></li>
-		<!--<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
-		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>-->
+		<li class=" cssMenui"><a class="  cssMenui" href="search_course.php"><img src="../images/user-group.ico" /> Student Schedule</a></li>
+		<li class=" cssMenui"><a class="  cssMenui" href="search_room.php"><img src="../images/school-icon.png" />Room Schedule</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>Add entry</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
 		<li class=" cssMenui"><a class="  cssMenui" href="user.php"><span><img src="../images/user.ico" />User</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 		<ul class=" cssMenum">
@@ -102,7 +102,7 @@
 		<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<!--<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>-->
+	<li class=" cssMenui"><a class="  cssMenui" href="sched.php">Schedule</a></li>
 
 	<li class=" cssMenui"><a class="  cssMenui" href="#"><span>About us</span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
 	<ul class=" cssMenum">
@@ -110,7 +110,7 @@
 		<li class=" cssMenui"><a class="  cssMenui" href="about_dev.php"><img src="../images/dev.png" />Developer</a></li>
 	</ul>
 	<!--[if lte IE 6]></td></tr></table></a><![endif]--></li>
-	<li class=" cssMenui"><a class="  cssMenui" href="User Manual.pdf">Help</a></li>
+	<li class=" cssMenui"><a class="  cssMenui" href="a.pdf">Help</a></li>
 
 	<li class=" cssMenui"><a class="  cssMenui" href="logout.php">Log out</a></li>
 </ul>
@@ -161,10 +161,8 @@
 		    <br />
 	      </div>
 				<?php
-				$prof =$_REQUEST['pT'];
-				$proftemp = mysqli_fetch_array(mysqli_query($conn, "SELECT teacher_name FROM profile where teacher_id = $prof"));
-                $profname = $proftemp['teacher_name'];
-				echo '<p align="center" ><span class="style32">'.$profname.'</span></p>';
+				$group =$_REQUEST['pG'];
+				echo '<p align="center" ><span class="style32">'.$group.'</span></p>';
             	?>
 		   <table width="700" border="1" >
             <tr>
@@ -176,7 +174,7 @@
               <td width="115"><div align="center">FRIDAY</div></td>
             </tr>
             <?php
-            $prof =$_REQUEST['pT'];
+            $group =$_REQUEST['pG'];
             function mysql_result($result, $row, $field = 0) {
  			   // Adjust the result pointer to that specific row
     			$result->data_seek($row);
@@ -200,12 +198,15 @@
             	echo $time1." - ".$time2.' <br />
   &nbsp;&nbsp; </div></td>
               <td><div align="center">';
-                 if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where teacher_id = $prof and day_id = 1 and time_s_id =$count")) != 0)
+                 if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where group_name = $group and day_id = 1 and time_s_id =$count")) != 0)
                  {
-                 $temp = mysqli_query($conn, "SELECT * FROM sched where teacher_id = $prof and day_id = 1 and time_s_id =$count");
+                 $temp = mysqli_query($conn, "SELECT * FROM sched where group_name = $group and day_id = 1 and time_s_id =$count");
                  $sub_id = mysql_result($temp, 0, "sub_id");
                  $subtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT sub_name FROM subjects WHERE sub_id = $sub_id"));
                  $sub = $subtemp['sub_name'];
+                 $prof_id = mysql_result($temp, 0, "teacher_id");
+                 $proftemp = mysqli_fetch_array(mysqli_query($conn, "SELECT teacher_name FROM profile WHERE teacher_id = $prof_id"));
+                 $prof = $proftemp['teacher_name'];
                  $room_id = mysql_result($temp, 0, "room_id");
                  $roomtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT room_name FROM room where room_id = $room_id"));
                  $room = $roomtemp['room_name'];
@@ -214,83 +215,100 @@
              	 {
              	 	$sub = "";
              	 	$room = "";
+                $prof = "";
              	 }
-             	 echo $sub."<br>".$room;
+             	 echo $sub."<br>".$prof."<br>".$room;
               echo '</div></td>
               <td><div align="center">';
-                if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where teacher_id = $prof and day_id = 2 and time_s_id =$count")) != 0)
+                if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where group_name = $group and day_id = 2 and time_s_id =$count")) != 0)
                  {
-                 $temp = mysqli_query($conn, "SELECT * FROM sched where teacher_id = $prof and day_id = 2 and time_s_id =$count");
+                 $temp = mysqli_query($conn, "SELECT * FROM sched where group_name = $group and day_id = 2 and time_s_id =$count");
                  $sub_id = mysql_result($temp, 0, "sub_id");
                  $subtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT sub_name FROM subjects WHERE sub_id = $sub_id"));
                  $sub = $subtemp['sub_name'];
+                 $prof_id = mysql_result($temp, 0, "teacher_id");
+                 $proftemp = mysqli_fetch_array(mysqli_query($conn, "SELECT teacher_name FROM profile WHERE teacher_id = $prof_id"));
+                 $prof = $proftemp['teacher_name'];
                  $room_id = mysql_result($temp, 0, "room_id");
                  $roomtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT room_name FROM room where room_id = $room_id"));
                  $room = $roomtemp['room_name'];
-             	 }
-             	 else
-             	 {
-             	 	$sub = "";
-             	 	$room = "";
-             	 }
-             	 echo $sub."<br>".$room;
+               }
+               else
+               {
+                $sub = "";
+                $room = "";
+                $prof = "";
+               }
+               echo $sub."<br>".$prof."<br>".$room;
                 echo '                 
               </div></td>
               <td><div align="center">';
-                if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where teacher_id = $prof and day_id = 3 and time_s_id =$count")) != 0)
+                if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where group_name = $group and day_id = 3 and time_s_id =$count")) != 0)
                  {
-                 $temp = mysqli_query($conn, "SELECT * FROM sched where teacher_id = $prof and day_id = 3 and time_s_id =$count");
+                 $temp = mysqli_query($conn, "SELECT * FROM sched where group_name = $group and day_id = 3 and time_s_id =$count");
                  $sub_id = mysql_result($temp, 0, "sub_id");
                  $subtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT sub_name FROM subjects WHERE sub_id = $sub_id"));
                  $sub = $subtemp['sub_name'];
+                 $prof_id = mysql_result($temp, 0, "teacher_id");
+                 $proftemp = mysqli_fetch_array(mysqli_query($conn, "SELECT teacher_name FROM profile WHERE teacher_id = $prof_id"));
+                 $prof = $proftemp['teacher_name'];
                  $room_id = mysql_result($temp, 0, "room_id");
                  $roomtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT room_name FROM room where room_id = $room_id"));
                  $room = $roomtemp['room_name'];
-             	 }
-             	 else
-             	 {
-             	 	$sub = "";
-             	 	$room = "";
-             	 }
-             	 echo $sub."<br>".$room;
+               }
+               else
+               {
+                $sub = "";
+                $room = "";
+                $prof = "";
+               }
+               echo $sub."<br>".$prof."<br>".$room;
                 echo '                 
               </div></td>
               <td><div align="center">';
-                if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where teacher_id = $prof and day_id = 4 and time_s_id =$count")) != 0)
+                if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where group_name = $group and day_id = 4 and time_s_id =$count")) != 0)
                  {
-                 $temp = mysqli_query($conn, "SELECT * FROM sched where teacher_id = $prof and day_id = 4 and time_s_id =$count");
+                 $temp = mysqli_query($conn, "SELECT * FROM sched where group_name = $group and day_id = 4 and time_s_id =$count");
                  $sub_id = mysql_result($temp, 0, "sub_id");
                  $subtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT sub_name FROM subjects WHERE sub_id = $sub_id"));
                  $sub = $subtemp['sub_name'];
+                 $prof_id = mysql_result($temp, 0, "teacher_id");
+                 $proftemp = mysqli_fetch_array(mysqli_query($conn, "SELECT teacher_name FROM profile WHERE teacher_id = $prof_id"));
+                 $prof = $proftemp['teacher_name'];
                  $room_id = mysql_result($temp, 0, "room_id");
                  $roomtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT room_name FROM room where room_id = $room_id"));
                  $room = $roomtemp['room_name'];
-             	 }
-             	 else
-             	 {
-             	 	$sub = "";
-             	 	$room = "";
-             	 }
-             	 echo $sub."<br>".$room;
+               }
+               else
+               {
+                $sub = "";
+                $room = "";
+                $prof = "";
+               }
+               echo $sub."<br>".$prof."<br>".$room;
                 echo '                 
               </div></td>
               <td><div align="center">';
-                if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched WHERE teacher_id = $prof and day_id = 5 and time_s_id =$count")) != 0)
+                if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sched where group_name = $group and day_id = 5 and time_s_id =$count")) != 0)
                  {
-                 $temp = mysqli_query($conn, "SELECT * FROM sched WHERE teacher_id = $prof and day_id = 5 and time_s_id =$count");
+                 $temp = mysqli_query($conn, "SELECT * FROM sched where group_name = $group and day_id = 5 and time_s_id =$count");
                  $sub_id = mysql_result($temp, 0, "sub_id");
                  $subtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT sub_name FROM subjects WHERE sub_id = $sub_id"));
                  $sub = $subtemp['sub_name'];
+                 $prof_id = mysql_result($temp, 0, "teacher_id");
+                 $proftemp = mysqli_fetch_array(mysqli_query($conn, "SELECT teacher_name FROM profile WHERE teacher_id = $prof_id"));
+                 $prof = $proftemp['teacher_name'];
                  $room_id = mysql_result($temp, 0, "room_id");
-                 $roomtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT room_name FROM room WHERE room_id = $room_id"));
+                 $roomtemp = mysqli_fetch_array(mysqli_query($conn, "SELECT room_name FROM room where room_id = $room_id"));
                  $room = $roomtemp['room_name'];
-             	 }
-             	 else
-             	 {
-             	 	$sub = "";
-             	 	$room = "";
-             	 }
-             	 echo $sub."<br>".$room;
+               }
+               else
+               {
+                $sub = "";
+                $room = "";
+                $prof = "";
+               }
+               echo $sub."<br>".$prof."<br>".$room;
                 echo '                 
               </div></td>
             </tr>';
